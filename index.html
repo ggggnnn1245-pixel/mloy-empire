@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>MLoY EMPIRE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;background-image:radial-gradient(circle at 20% 0%,rgba(167,139,250,.15),transparent 50%),radial-gradient(circle at 80% 100%,rgba(255,95,162,.12),transparent 50%)}
+.header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(16,16,25,.9);border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:10}
+.logo{font-size:15px;font-weight:900;background:linear-gradient(135deg,#ff5fa2,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.money{font-size:16px;font-weight:900;color:#5eead4}
+.income{font-size:10px;color:#5a5a72;text-align:right}
+.click-area{padding:18px;display:flex;flex-direction:column;align-items:center}
+.click-btn{width:160px;height:160px;border-radius:50%;border:none;background:linear-gradient(135deg,#ff5fa2,#a78bfa);color:#fff;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 15px 50px rgba(255,95,162,.4),0 0 0 8px rgba(255,95,162,.1);transition:transform .1s}
+.click-btn:active{transform:scale(.94)}
+.click-power{margin-top:10px;font-size:11px;color:#a0a0b8}
+.click-power span{color:#5eead4;font-weight:800}
+.tabs{display:flex;gap:2px;padding:0 8px;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(16,16,25,.7)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:11px 11px;background:none;border:none;color:#5a5a72;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;position:relative;font-family:inherit}
+.tab.active{color:#fff}
+.tab.active::after{content:'';position:absolute;bottom:0;left:6px;right:6px;height:3px;background:linear-gradient(90deg,#ff5fa2,#a78bfa);border-radius:3px 3px 0 0}
+.content{padding:12px;overflow-y:auto}
+.panel{display:none}
+.panel.active{display:block}
+.cats{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
+.cats::-webkit-scrollbar{display:none}
+.cat{padding:7px 14px;background:#181826;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#a0a0b8;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
+.cat.active{background:linear-gradient(135deg,#ff5fa2,#a78bfa);color:#fff;border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.card{background:#181826;border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rc,#6b7280)}
+.card.common{--rc:#6b7280}.card.uncommon{--rc:#22c55e}.card.rare{--rc:#3b82f6}.card.epic{--rc:#a855f7}.card.legendary{--rc:#f59e0b}.card.mythic{--rc:#ef4444}
+.card.legendary{background:linear-gradient(180deg,rgba(245,158,11,.1),#181826)}
+.card.mythic{background:linear-gradient(180deg,rgba(239,68,68,.12),#181826)}
+.card.epic{background:linear-gradient(180deg,rgba(168,85,247,.1),#181826)}
+.card.rare{background:linear-gradient(180deg,rgba(59,130,246,.1),#181826)}
+.card.owned{background:linear-gradient(180deg,rgba(94,234,212,.12),#181826);border-color:#5eead4}
+.card.aff{border-color:#5eead4;box-shadow:0 0 0 3px rgba(94,234,212,.12)}
+.name{font-size:11px;font-weight:800;text-align:center}
+.rarity{font-size:8px;font-weight:800;text-transform:uppercase;color:var(--rc);letter-spacing:1px}
+.price{font-size:12px;font-weight:800;color:#fbbf24}
+.inc{font-size:9px;color:#5eead4;font-weight:700}
+.btn{width:100%;padding:7px;margin-top:3px;border:none;border-radius:9px;background:linear-gradient(135deg,#ff5fa2,#a78bfa);color:#fff;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit;text-transform:uppercase}
+.btn:disabled{background:rgba(255,255,255,.05);color:#5a5a72}
+.btn.aff{background:linear-gradient(135deg,#5eead4,#60a5fa);color:#0a0a0f}
+.upg{background:#181826;border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:7px}
+.upg.aff{border-color:#5eead4}
+.upg-head{display:flex;gap:10px;align-items:center}
+.upg-name{font-size:12px;font-weight:800}
+.upg-desc{font-size:9px;color:#a0a0b8;margin-top:2px}
+.upg-stats{display:flex;justify-content:space-between;padding:7px;background:rgba(0,0,0,.2);border-radius:8px;font-size:10px}
+.upg-lvl{color:#a0a0b8;font-weight:700}
+.upg-lvl span{color:#a78bfa}
+.upg-price{color:#fbbf24;font-weight:800}
+.prest-wrap{text-align:center;padding:20px}
+.prest-icon{font-size:60px;margin-bottom:10px}
+.prest-title{font-size:26px;font-weight:900;background:linear-gradient(135deg,#fbbf24,#ff5fa2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.prest-desc{font-size:12px;color:#a0a0b8;margin-bottom:20px;line-height:1.5}
+.prest-card{background:linear-gradient(180deg,rgba(251,191,36,.1),#181826);border:1.5px solid rgba(251,191,36,.3);border-radius:16px;padding:16px;margin-bottom:16px;text-align:left}
+.prest-row{display:flex;justify-content:space-between;padding:8px 0;font-size:12px}
+.prest-row + .prest-row{border-top:1px solid rgba(255,255,255,.08)}
+.prest-row span:last-child{color:#5eead4;font-weight:800}
+.prest-btn{padding:14px 30px;background:linear-gradient(135deg,#fbbf24,#ff5fa2);border:none;border-radius:100px;color:#0a0a0f;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;text-transform:uppercase}
+.prest-btn:disabled{background:#202032;color:#5a5a72}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);padding:12px 20px;background:rgba(24,24,38,.95);border:1.5px solid #5eead4;border-radius:12px;font-size:12px;font-weight:700;color:#5eead4;opacity:0;pointer-events:none;transition:all .3s;z-index:100;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.particle{position:fixed;font-size:15px;font-weight:900;color:#5eead4;pointer-events:none;animation:floatUp 1s ease-out forwards;z-index:5}
+@keyframes floatUp{0%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-80px) scale(1.2)}}
+</style>
+</head>
+<body>
+<div class="header">
+<div class="logo">MLoY EMPIRE</div>
+<div>
+<div class="money" id="money">$0</div>
+<div class="income" id="income">+$0/сек</div>
+</div>
+</div>
+<div class="click-area">
+<button class="click-btn" id="clickBtn">КУПИТЬ</button>
+<div class="click-power">Сила клика: <span id="cp">$1</span></div>
+</div>
+<div class="tabs">
+<button class="tab active" data-t="brands">🏪 Бренды</button>
+<button class="tab" data-t="upg">⚡ Улучшения</button>
+<button class="tab" data-t="prest">🌟 Престиж</button>
+</div>
+<div class="content">
+<div class="panel active" id="p-brands">
+<div class="cats" id="cats"></div>
+<div class="grid" id="brands"></div>
+</div>
+<div class="panel" id="p-upg">
+<div class="grid" id="upgrades" style="grid-template-columns:1fr"></div>
+</div>
+<div class="panel" id="p-prest">
+<div class="prest-wrap">
+<div class="prest-icon">🌟</div>
+<div class="prest-title">ПРЕСТИЖ</div>
+<div class="prest-desc">Сбрось прогресс и получи вечный множитель.<br>Каждое очко = <b style="color:#fbbf24">+15%</b> к доходу.</div>
+<div class="prest-card">
+<div class="prest-row"><span>Всего заработано</span><span id="pTotal">$0</span></div>
+<div class="prest-row"><span>Доступно очков</span><span id="pAvail">0</span></div>
+<div class="prest-row"><span>Множитель</span><span id="pMult">x1.0</span></div>
+<div class="prest-row"><span>Престижей</span><span id="pCount">0</span></div>
+</div>
+<button class="prest-btn" id="pBtn">Сделать престиж</button>
+</div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+var BRANDS=[
+{cat:"Обувь",name:"Nike",price:50,inc:1,rar:"common"},
+{cat:"Обувь",name:"Adidas",price:200,inc:4,rar:"common"},
+{cat:"Обувь",name:"Puma",price:800,inc:15,rar:"common"},
+{cat:"Обувь",name:"Balenciaga",price:20000,inc:300,rar:"rare"},
+{cat:"Обувь",name:"Jordan",price:80000,inc:1200,rar:"epic"},
+{cat:"Обувь",name:"Yeezy",price:400000,inc:6000,rar:"legendary"},
+{cat:"Одежда",name:"HM",price:150,inc:3,rar:"common"},
+{cat:"Одежда",name:"Zara",price:600,inc:12,rar:"common"},
+{cat:"Одежда",name:"Supreme",price:10000,inc:170,rar:"rare"},
+{cat:"Одежда",name:"Gucci",price:600000,inc:9500,rar:"legendary"},
+{cat:"Люкс",name:"Prada",price:50000,inc:800,rar:"rare"},
+{cat:"Люкс",name:"Versace",price:200000,inc:3200,rar:"epic"},
+{cat:"Люкс",name:"Louis Vuitton",price:2000000,inc:30000,rar:"legendary"},
+{cat:"Люкс",name:"Hermes",price:150000000,inc:2200000,rar:"mythic"}
+];
+var UPGRADES=[
+{name:"Клик +1",price:60,mult:1.5,type:"click",value:1,desc:"+1 к клику"},
+{name:"Клик +5",price:800,mult:1.6,type:"click",value:5,desc:"+5 к клику"},
+{name:"Клик +25",price:12000,mult:1.7,type:"click",value:25,desc:"+25 к клику"},
+{name:"Клик +150",price:200000,mult:1.8,type:"click",value:150,desc:"+150 к клику"},
+{name:"Доход x2",price:5000,mult:2,type:"income",value:2,desc:"Умножает доход на 2"},
+{name:"Доход x3",price:250000,mult:3,type:"income",value:3,desc:"Умножает доход на 3"},
+{name:"Доход x4",price:8000000,mult:2.5,type:"income",value:4,desc:"Умножает доход на 4"}
+];
+var S={money:0,earned:0,clicks:0,cp:1,pp:0,pc:0,pm:1,owned:[],upg:{}};
+UPGRADES.forEach(function(u){S.upg[u.name]=0});
+var curCat="Обувь";
+function fmt(n){
+n=Math.floor(n);
+if(n>=1e9)return(n/1e9).toFixed(2)+"B";
+if(n>=1e6)return(n/1e6).toFixed(2)+"M";
+if(n>=1e3)return(n/1e3).toFixed(2)+"K";
+return String(n);
+}
+function toast(t){
+var e=document.getElementById("toast");
+e.textContent=t;
+e.classList.add("show");
+clearTimeout(e._t);
+e._t=setTimeout(function(){e.classList.remove("show")},1800);
+}
+function particle(a){
+var p=document.createElement("div");
+p.className="particle";
+p.textContent="+$"+fmt(a);
+p.style.left=(window.innerWidth/2+Math.random()*100-50)+"px";
+p.style.top="160px";
+document.body.appendChild(p);
+setTimeout(function(){p.remove()},1000);
+}
+function getIncome(){
+var inc=0;
+S.owned.forEach(function(n){
+var b=BRANDS.find(function(x){return x.name===n});
+if(b)inc+=b.inc;
+});
+UPGRADES.forEach(function(u){
+if(u.type==="income")inc*=Math.pow(u.value,S.upg[u.name]);
+});
+inc*=S.pm;
+return inc;
+}
+function renderHeader(){
+document.getElementById("money").textContent="$"+fmt(S.money);
+document.getElementById("income").textContent="+$"+fmt(getIncome())+"/сек";
+document.getElementById("cp").textContent="$"+fmt(S.cp*S.pm);
+}
+function renderCats(){
+var cats=[];
+BRANDS.forEach(function(b){if(cats.indexOf(b.cat)===-1)cats.push(b.cat)});
+var el=document.getElementById("cats");
+el.innerHTML="";
+cats.forEach(function(c){
+var btn=document.createElement("button");
+btn.className="cat"+(c===curCat?" active":"");
+btn.textContent=c;
+btn.onclick=function(){curCat=c;renderBrands()};
+el.appendChild(btn);
+});
+}
+function renderBrands(){
+renderCats();
+var g=document.getElementById("brands");
+g.innerHTML="";
+BRANDS.forEach(function(b){
+if(b.cat!==curCat)return;
+var owned=S.owned.indexOf(b.name)!==-1;
+var aff=!owned&&S.money>=b.price;
+var c=document.createElement("div");
+c.className="card "+b.rar+(owned?" owned":(aff?" aff":""));
+c.innerHTML='<div class="name">'+b.name+'</div>'+
+'<div class="rarity">'+b.rar+'</div>'+
+'<div class="price">$'+fmt(b.price)+'</div>'+
+'<div class="inc">+$'+fmt(b.inc)+'/сек</div>'+
+'<button class="btn'+(aff?" aff":"")+'" '+(owned?"disabled":"")+'>'+
+(owned?"Куплено":"Купить")+'</button>';
+if(!owned)c.querySelector("button").onclick=function(){buyBrand(b)};
+g.appendChild(c);
+});
+}
+function buyBrand(b){
+if(S.owned.indexOf(b.name)!==-1)return;
+if(S.money<b.price){toast("Мало денег!");return}
+S.money-=b.price;
+S.owned.push(b.name);
+renderHeader();renderBrands();save();
+}
+function renderUpg(){
+var g=document.getElementById("upgrades");
+g.innerHTML="";
+UPGRADES.forEach(function(u){
+var lvl=S.upg[u.name];
+var price=Math.floor(u.price*Math.pow(u.mult,lvl));
+var aff=S.money>=price;
+var c=document.createElement("div");
+c.className="upg"+(aff?" aff":"");
+c.innerHTML='<div class="upg-head"><div style="width:38px;height:38px;border-radius:10px;background:rgba(255,95,162,.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#ff5fa2">'+(u.type==="income"?"X":"+")+'</div>'+
+'<div style="flex:1"><div class="upg-name">'+u.name+'</div><div class="upg-desc">'+u.desc+'</div></div></div>'+
+'<div class="upg-stats"><div class="upg-lvl">Ур. <span>'+lvl+'</span></div>'+
+'<div class="upg-price">$'+fmt(price)+'</div></div>'+
+'<button class="btn'+(aff?" aff":"")+'">Улучшить</button>';
+c.querySelector("button").onclick=function(){buyUpg(u)};
+g.appendChild(c);
+});
+}
+function buyUpg(u){
+var lvl=S.upg[u.name];
+var price=Math.floor(u.price*Math.pow(u.mult,lvl));
+if(S.money<price){toast("Мало денег!");return}
+S.money-=price;
+S.upg[u.name]=lvl+1;
+if(u.type==="click")S.cp+=u.value;
+renderHeader();renderUpg();save();
+}
+function renderPrest(){
+document.getElementById("pTotal").textContent="$"+fmt(S.earned);
+var gain=Math.floor(Math.sqrt(S.earned/5000000));
+document.getElementById("pAvail").textContent=gain;
+document.getElementById("pMult").textContent="x"+S.pm.toFixed(1);
+document.getElementById("pCount").textContent=S.pc;
+var btn=document.getElementById("pBtn");
+if(gain>0){btn.disabled=false;btn.textContent="Сделать престиж (+"+gain+")"}
+else{btn.disabled=true;btn.textContent="Нужно больше"}
+}
+function doPrest(){
+var gain=Math.floor(Math.sqrt(S.earned/5000000));
+if(gain<=0)return;
+if(!confirm("Получить "+gain+" очков?\nПрогресс сбросится."))return;
+S.pp+=gain;S.pc++;
+S.pm=1+S.pp*0.15;
+S.money=0;S.earned=0;S.clicks=0;S.cp=1;
+S.owned=[];
+UPGRADES.forEach(function(u){S.upg[u.name]=0});
+renderAll();save();
+toast("Престиж! x"+S.pm.toFixed(1));
+}
+function renderAll(){renderHeader();renderBrands();renderUpg();renderPrest()}
+function save(){try{localStorage.setItem("mloyEmpire",JSON.stringify(S))}catch(e){}}
+function load(){
+try{
+var r=localStorage.getItem("mloyEmpire");
+if(!r)return;
+var d=JSON.parse(r);
+for(var k in d)S[k]=d[k];
+UPGRADES.forEach(function(u){if(S.upg[u.name]===undefined)S.upg[u.name]=0});
+}catch(e){}
+}
+document.getElementById("clickBtn").onclick=function(){
+var amt=S.cp*S.pm;
+S.money+=amt;S.earned+=amt;S.clicks++;
+particle(amt);
+renderHeader();
+};
+document.getElementById("pBtn").onclick=doPrest;
+document.querySelectorAll(".tab").forEach(function(t){
+t.onclick=function(){
+document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active")});
+document.querySelectorAll(".panel").forEach(function(x){x.classList.remove("active")});
+t.classList.add("active");
+document.getElementById("p-"+t.dataset.t).classList.add("active");
+};
+});
+setInterval(function(){
+var inc=getIncome()/10;
+S.money+=inc;S.earned+=inc;
+renderHeader();
+},100);
+setInterval(renderBrands,1500);
+setInterval(renderUpg,1500);
+setInterval(renderPrest,1500);
+setInterval(save,15000);
+window.addEventListener("beforeunload",save);
+load();
+renderAll();
+</script>
+</body>
+</html>
