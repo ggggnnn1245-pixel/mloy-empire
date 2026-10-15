@@ -1527,11 +1527,40 @@ if(S.lastWheelReset!==todayKey()){
 S.wheelSpins=Math.max(S.wheelSpins||0,3);
 S.lastWheelReset=todayKey();
 }
-
-checkStreak();
+try{
 load();
+}catch(e){console.log("load error:",e)}
+
+try{
 applySkin();
+}catch(e){console.log("skin error:",e)}
+
+try{
+checkStreak();
+}catch(e){console.log("streak error:",e)}
+
+try{
 renderAll();
+}catch(e){
+console.log("render error:",e);
+alert("Ошибка: "+e.message);
+}
+
+try{
+setInterval(function(){
+var inc=getIncome()/10;
+S.money+=inc;S.earned+=inc;
+var auto=getAutoRate();
+if(auto>0){
+var autoAmt=auto/10*getClickPower();
+if(S.boostEnd>Date.now())autoAmt*=S.boost;
+autoAmt*=getLuckMult();
+S.money+=autoAmt;S.earned+=autoAmt;
+}
+renderHeader();
+},100);
+}catch(e){console.log("loop error:",e)}
+
 </script>
 </body>
 </html>
