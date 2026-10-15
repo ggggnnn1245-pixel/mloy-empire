@@ -77,7 +77,7 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .pet-card{background:#181826;border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:11px;text-align:center;cursor:pointer}
 .pet-card.active{border-color:#5eead4;box-shadow:0 0 0 3px rgba(94,234,212,.15)}
 .pet-card.locked{opacity:.4}
-.pet-emoji{font-size:28px;margin-bottom:3px;font-weight:900;color:#a78bfa}
+.pet-emoji{font-size:28px;margin-bottom:3px}
 .pet-name{font-size:10px;font-weight:800}
 .pet-bonus{font-size:8px;color:#5eead4;font-weight:700;margin-top:2px}
 .mission{display:flex;gap:10px;align-items:center;padding:10px;background:#181826;border:1.5px solid rgba(255,255,255,.08);border-radius:11px;margin-bottom:7px}
@@ -132,6 +132,8 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .wheel{width:100%;height:100%;border-radius:50%;transition:transform 4s cubic-bezier(.17,.67,.12,.99);box-shadow:0 0 0 8px #202032,0 0 0 12px rgba(255,255,255,.16),0 20px 60px rgba(0,0,0,.5);background:conic-gradient(#ff5fa2 0deg 45deg,#a78bfa 45deg 90deg,#5eead4 90deg 135deg,#fbbf24 135deg 180deg,#60a5fa 180deg 225deg,#f87171 225deg 270deg,#22c55e 270deg 315deg,#fb923c 315deg 360deg)}
 .wheel-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:22px solid #fbbf24;z-index:2}
 .wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#0a0a0f;border:3px solid #fbbf24;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fbbf24;z-index:1}
+.wheel-labels{position:absolute;inset:0;pointer-events:none}
+.wheel-label{position:absolute;font-size:9px;font-weight:900;color:#0a0a0f;text-shadow:0 1px 1px rgba(255,255,255,.4);white-space:nowrap}
 .lucky-box{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(255,95,162,.15));border:1.5px solid #fbbf24;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px}
 .lucky-box-title{font-size:14px;font-weight:900;color:#fbbf24;margin-bottom:4px}
 .lucky-box-desc{font-size:10px;color:#a0a0b8;margin-bottom:12px}
@@ -139,6 +141,14 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .lucky-box-btn:disabled{background:#202032;color:#5a5a72}
 .section-title{font-size:12px;font-weight:800;margin-bottom:9px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:'';width:3px;height:13px;border-radius:2px;background:linear-gradient(180deg,#ff5fa2,#a78bfa)}
+.donate-card{background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(167,139,250,.12));border:1.5px solid rgba(251,191,36,.4);border-radius:14px;padding:14px;margin-bottom:10px;text-align:left}
+.donate-card.owned{border-color:#5eead4;background:linear-gradient(135deg,rgba(94,234,212,.12),rgba(96,165,250,.12))}
+.donate-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.donate-emoji{font-size:28px}
+.donate-name{font-size:13px;font-weight:900;color:#fbbf24}
+.donate-desc{font-size:10px;color:#a0a0b8;margin-top:2px}
+.donate-price{padding:8px 12px;background:linear-gradient(135deg,#fbbf24,#fb923c);border:none;border-radius:9px;color:#0a0a0f;font-family:inherit;font-size:11px;font-weight:900;cursor:pointer;width:100%;text-transform:uppercase}
+.donate-price:disabled{background:#202032;color:#5a5a72}
 </style>
 </head>
 <body>
@@ -163,6 +173,7 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <button class="qa-btn" id="wheelBtn">🎡 Колесо</button>
 <button class="qa-btn" id="luckyBtn">🎰 Кейс</button>
 <button class="qa-btn" id="eventBtn">⚡ Событие</button>
+<button class="qa-btn" id="donateBtn">💎 Донат</button>
 </div>
 
 <div class="tabs">
@@ -211,7 +222,7 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <div class="modal-overlay" id="wheelModal"><div class="modal">
 <div class="modal-title">🎡 Колесо фортуны</div>
 <div class="modal-desc" id="wheelDesc">Крути!</div>
-<div class="wheel-container"><div class="wheel-pointer"></div><div class="wheel" id="wheel"></div><div class="wheel-center">SPIN</div></div>
+<div class="wheel-container"><div class="wheel-pointer"></div><div class="wheel" id="wheel"></div><div class="wheel-labels" id="wheelLabels"></div><div class="wheel-center">SPIN</div></div>
 <button class="modal-btn" id="wheelSpin">Крутить</button>
 <button class="modal-btn secondary" id="wheelClose">Закрыть</button>
 </div></div>
@@ -231,6 +242,13 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <div class="modal-title" id="eventTitle">⚡ Событие</div>
 <div class="modal-desc" id="eventDesc"></div>
 <button class="modal-btn secondary" id="eventClose">Закрыть</button>
+</div></div>
+
+<div class="modal-overlay" id="donateModal"><div class="modal">
+<div class="modal-title">💎 Магазин доната</div>
+<div class="modal-desc">Смотри рекламу — получай награды!</div>
+<div id="donateList"></div>
+<button class="modal-btn secondary" id="donateClose">Закрыть</button>
 </div></div>
 
 <div class="toast" id="toast"></div>
@@ -334,6 +352,16 @@ var EVENTS=[
 {t:"🎰 Джекпот!",d:"+$500,000!",e:"money",v:500000},
 {t:"💢 Крит-лихорадка!",d:"Все клики криты 30 сек",e:"crit",dur:30}
 ];
+var DONATE=[
+{id:"money1k",e:"💰",n:"Стартовый капитал",d:"+$10,000 сразу",ads:1,effect:{type:"money",v:10000}},
+{id:"money100k",e:"💰",n:"Крупная сумма",d:"+$100,000 сразу",ads:2,effect:{type:"money",v:100000}},
+{id:"x2",e:"⚡",n:"2x Доход",d:"Умножает ВЕСЬ доход на 2 навсегда",ads:1,effect:{type:"mult",v:2}},
+{id:"x4",e:"🔥",n:"4x Доход",d:"Умножает ВЕСЬ доход на 4 навсегда",ads:3,effect:{type:"mult",v:4}},
+{id:"x10",e:"💎",n:"10x Доход",d:"Умножает ВЕСЬ доход на 10 навсегда",ads:5,effect:{type:"mult",v:10}},
+{id:"x20",e:"👑",n:"20x Доход",d:"Умножает ВЕСЬ доход на 20 навсегда",ads:10,effect:{type:"mult",v:20}},
+{id:"click10",e:"👆",n:"Клик x10",d:"Умножает силу клика на 10 навсегда",ads:3,effect:{type:"clickmult",v:10}},
+{id:"starter",e:"🎁",n:"Стартовый набор",d:"+$50,000 и 5 вращений",ads:2,effect:{type:"pack",money:50000,spins:5}}
+];
 var FAKE=[["Модник",95],["Стиляга",87],["ФэшнКиллер",80],["Mr Gucci",72],["Кутюрье",65],["Трендсеттер",58],["Инфлюенсер",50],["Стилист",43],["Денди",35],["Пижон",28]];
 
 var S={
@@ -342,7 +370,7 @@ owned:[],upg:{},ach:{},pets:[],activePet:null,
 xp:0,lvl:1,boost:null,boostEnd:0,discount:null,discountEnd:0,alwaysCrit:0,
 dailyStreak:0,lastDaily:null,wheelSpins:3,wheelTotal:0,
 lastLucky:0,lastWheelReset:null,missions:[],lastMissRefresh:null,
-luckBonus:0,critChance:0,critDamage:2
+luckBonus:0,critChance:0,critDamage:2,donations:[],donateMult:1,donateClickMult:1,adsWatched:0
 };
 UPGRADES.forEach(function(u){S.upg[u.name]=0});
 ACHS.forEach(function(a){S.ach[a.n]=false});
@@ -433,7 +461,7 @@ return v;
 }
 function getClickPower(){
 var cp=S.cp+getPetBonus("click");
-return cp*S.pm;
+return cp*S.pm*(S.donateClickMult||1);
 }
 function getIncome(){
 var inc=0;
@@ -446,6 +474,7 @@ if(u.type==="income")inc*=Math.pow(u.value,S.upg[u.name]);
 });
 inc*=(1+getPetBonus("income"));
 inc*=S.pm;
+inc*=(S.donateMult||1);
 if(S.boostEnd>Date.now())inc*=S.boost;
 inc*=getLuckMult();
 return inc;
@@ -476,8 +505,6 @@ document.getElementById("lvl").textContent="Ур. "+S.lvl;
 var need=xpNeed(S.lvl);
 document.getElementById("xpFill").style.width=(S.xp/need*100)+"%";
 document.getElementById("dailyDot").style.display=(S.lastDaily!==todayKey())?"block":"none";
-var db=document.getElementById("dailyBtn");
-if(db)db.classList.toggle("ready",S.lastDaily!==todayKey());
 }
 function renderCats(){
 var cats=[];
@@ -655,7 +682,7 @@ else{btn.disabled=true;btn.textContent="Нужно больше"}
 function doPrest(){
 var gain=Math.floor(Math.sqrt(S.earned/5000000));
 if(gain<=0)return;
-if(!confirm("Получить "+gain+" очков?\nПрогресс сбросится (питомцы сохранятся)."))return;
+if(!confirm("Получить "+gain+" очков?\nПрогресс сбросится (питомцы и донат сохранятся)."))return;
 S.pp+=gain;
 S.pc++;
 S.pm=1+S.pp*.15;
@@ -723,7 +750,29 @@ renderMissions();renderHeader();save();
 }
 function openWheel(){
 updateWheelDesc();
+drawWheelLabels();
 document.getElementById("wheelModal").classList.add("show");
+}
+function drawWheelLabels(){
+var box=document.getElementById("wheelLabels");
+if(!box)return;
+box.innerHTML="";
+var n=WHEEL.length;
+var seg=360/n;
+var radius=88;
+WHEEL.forEach(function(p,i){
+var angle=(i*seg+seg/2)-90;
+var rad=angle*Math.PI/180;
+var x=120+Math.cos(rad)*radius;
+var y=120+Math.sin(rad)*radius;
+var lbl=document.createElement("div");
+lbl.className="wheel-label";
+lbl.textContent=p.l;
+lbl.style.left=x+"px";
+lbl.style.top=y+"px";
+lbl.style.transform="translate(-50%,-50%) rotate("+(angle+90)+"deg)";
+box.appendChild(lbl);
+});
 }
 function updateWheelDesc(){
 document.getElementById("wheelDesc").textContent="Попыток: "+(S.wheelSpins||0);
@@ -855,7 +904,19 @@ sWin();
 renderAll();save();
 openLucky();
 }
+var EVENT_CD=60000;
 function triggerEvent(){
+var now=Date.now();
+if(S.eventEnd&&now<S.eventEnd){
+var rem=Math.ceil((S.eventEnd-now)/1000);
+toast("Событие через "+rem+"с");
+return;
+}
+var cost=Math.max(1000,Math.floor(S.money*0.05));
+if(S.money<cost){toast("Нужно $"+fmt(cost));return}
+if(!confirm("Запустить событие за $"+fmt(cost)+"?"))return;
+S.money-=cost;
+S.eventEnd=now+EVENT_CD;
 var ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
 document.getElementById("eventTitle").textContent=ev.t;
 document.getElementById("eventDesc").textContent=ev.d;
@@ -866,6 +927,86 @@ else if(ev.e==="disc"){S.discount=ev.v;S.discountEnd=Date.now()+ev.dur*1000}
 else if(ev.e==="crit"){S.alwaysCrit=Date.now()+ev.dur*1000}
 sWin();
 renderAll();
+save();
+}
+function showAd(cb){
+toast("📺 Реклама...");
+setTimeout(function(){cb(true)},1200);
+}
+function openDonate(){
+var list=document.getElementById("donateList");
+var total=S.adsWatched||0;
+list.innerHTML='<div style="text-align:center;padding:10px;margin-bottom:12px;background:rgba(94,234,212,.08);border-radius:10px;border:1px solid rgba(94,234,212,.2)">'+
+'<div style="font-size:11px;color:#a0a0b8">Всего просмотрено реклам</div>'+
+'<div style="font-size:22px;font-weight:900;color:#5eead4;margin-top:4px">📺 '+total+'</div>'+
+'</div>';
+DONATE.forEach(function(d){
+var owned=S.donations&&S.donations.indexOf(d.id)!==-1;
+var card=document.createElement("div");
+card.className="donate-card"+(owned?" owned":"");
+card.innerHTML='<div class="donate-head">'+
+'<div class="donate-emoji">'+d.e+'</div>'+
+'<div style="flex:1"><div class="donate-name">'+d.n+(owned?' ✓':'')+'</div>'+
+'<div class="donate-desc">'+d.d+'</div></div></div>'+
+'<button class="donate-price"'+(owned?" disabled":"")+'>'+
+(owned?"Куплено":'📺 Смотреть '+d.ads+' '+(d.ads===1?"рекламу":"реклам"))+'</button>';
+if(!owned){
+card.querySelector("button").onclick=function(){buyDonate(d)};
+}
+list.appendChild(card);
+});
+document.getElementById("donateModal").classList.add("show");
+}
+function buyDonate(d){
+if(!S.donations)S.donations=[];
+if(S.donations.indexOf(d.id)!==-1)return;
+var msg="Посмотреть "+d.ads+" "+(d.ads===1?"рекламу":"реклам")+"?\n\nНаграда: "+d.n;
+if(!confirm(msg))return;
+var remaining=d.ads;
+function watchOne(){
+if(remaining<=0){
+applyDonate(d);
+return;
+}
+showAd(function(ok){
+if(ok){
+remaining--;
+S.adsWatched=(S.adsWatched||0)+1;
+save();
+if(remaining>0){
+toast("Осталось реклам: "+remaining);
+setTimeout(watchOne,500);
+}else{
+applyDonate(d);
+}
+}else{
+toast("Реклама не досмотрена");
+}
+});
+}
+watchOne();
+}
+function applyDonate(d){
+S.donations.push(d.id);
+var e=d.effect;
+if(e.type==="money"){
+var v=e.v*getLuckMult();
+S.money+=v;S.earned+=v;
+toast("+"+fmt(v));
+}else if(e.type==="mult"){
+S.donateMult=(S.donateMult||1)*e.v;
+toast("Множитель x"+e.v+" активирован!");
+}else if(e.type==="clickmult"){
+S.donateClickMult=(S.donateClickMult||1)*e.v;
+toast("Клик x"+e.v+"!");
+}else if(e.type==="pack"){
+S.money+=e.money;S.earned+=e.money;
+S.wheelSpins=(S.wheelSpins||0)+e.spins;
+toast("Набор получен!");
+}
+sWin();
+renderAll();save();
+openDonate();
 }
 function renderLB(){
 var l=document.getElementById("lbList");
@@ -897,7 +1038,7 @@ var items=[
 ["Круток",S.wheelTotal],
 ["Уровень",S.lvl],
 ["Авто-клик",getAutoRate()+"/сек"],
-["Крит",Math.floor(getCritChance()*100)+"%"]
+["Реклам",S.adsWatched||0]
 ];
 g.innerHTML=items.map(function(it){
 return '<div class="stat-box"><div class="stat-box-v">'+it[1]+'</div>'+
@@ -928,6 +1069,9 @@ UPGRADES.forEach(function(u){if(S.upg[u.name]===undefined)S.upg[u.name]=0});
 ACHS.forEach(function(a){if(S.ach[a.n]===undefined)S.ach[a.n]=false});
 if(!S.pets)S.pets=[];
 if(!S.missions)S.missions=[];
+if(!S.donations)S.donations=[];
+if(!S.donateMult)S.donateMult=1;
+if(!S.donateClickMult)S.donateClickMult=1;
 }catch(e){}
 }
 document.getElementById("clickBtn").onclick=function(){doClick()};
@@ -935,6 +1079,7 @@ document.getElementById("dailyBtn").onclick=openDaily;
 document.getElementById("wheelBtn").onclick=openWheel;
 document.getElementById("luckyBtn").onclick=openLucky;
 document.getElementById("eventBtn").onclick=triggerEvent;
+document.getElementById("donateBtn").onclick=openDonate;
 document.getElementById("dailyClaim").onclick=claimDaily;
 document.getElementById("dailyClose").onclick=function(){document.getElementById("dailyModal").classList.remove("show")};
 document.getElementById("wheelSpin").onclick=function(){spinWheel(true)};
@@ -942,6 +1087,7 @@ document.getElementById("wheelClose").onclick=function(){document.getElementById
 document.getElementById("luckyOpen").onclick=openLuckyCase;
 document.getElementById("luckyClose").onclick=function(){document.getElementById("luckyModal").classList.remove("show")};
 document.getElementById("eventClose").onclick=function(){document.getElementById("eventModal").classList.remove("show")};
+document.getElementById("donateClose").onclick=function(){document.getElementById("donateModal").classList.remove("show")};
 document.getElementById("pBtn").onclick=doPrest;
 
 document.querySelectorAll(".tab").forEach(function(t){
@@ -993,14 +1139,9 @@ toast("Буст x"+m+"!");
 setTimeout(boostLoop,60000);
 },60000);
 
-setTimeout(function eventLoop(){
-triggerEvent();
-setTimeout(eventLoop,120000+Math.random()*120000);
-},180000);
-
 window.addEventListener("beforeunload",save);
 
-if(S.lastWheelReset!==todayKey()){
+if(S.lastWheelReset!==todayKey  ()){
 S.wheelSpins=Math.max(S.wheelSpins||0,3);
 S.lastWheelReset=todayKey();
 }
