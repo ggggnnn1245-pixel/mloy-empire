@@ -21,10 +21,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .click-btn{width:150px;height:150px;border-radius:50%;border:none;background:linear-gradient(135deg,#ff5fa2,#a78bfa);color:#fff;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 15px 50px rgba(255,95,162,.4),0 0 0 8px rgba(255,95,162,.1);transition:transform .1s,background .3s}
 .click-btn:active{transform:scale(.94)}
 .click-btn.golden{background:linear-gradient(135deg,#fbbf24,#fb923c);box-shadow:0 15px 50px rgba(251,191,36,.6),0 0 0 8px rgba(251,191,36,.2);animation:pulse .5s ease-in-out infinite}
-.click-btn.skin-diamond{background:linear-gradient(135deg,#60a5fa,#a78bfa)}
-.click-btn.skin-fire{background:linear-gradient(135deg,#f87171,#fb923c)}
-.click-btn.skin-rainbow{background:linear-gradient(135deg,#ff5fa2,#fbbf24,#5eead4,#a78bfa);background-size:300% 300%;animation:rainbow 3s ease infinite}
-.click-btn.skin-dark{background:linear-gradient(135deg,#1f1f2e,#4c1d95)}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
 @keyframes rainbow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .click-power{margin-top:8px;font-size:10px;color:#a0a0b8}
@@ -125,7 +121,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);padding:11px 18px;background:rgba(24,24,38,.95);border:1.5px solid #5eead4;border-radius:11px;font-size:11px;font-weight:700;color:#5eead4;opacity:0;pointer-events:none;transition:all .3s;z-index:100;text-align:center;max-width:90vw}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.gold{border-color:#fbbf24;color:#fbbf24}
-.toast.red{border-color:#f87171;color:#f87171}
 .particle{position:fixed;font-size:14px;font-weight:900;color:#5eead4;pointer-events:none;animation:floatUp 1s ease-out forwards;z-index:5}
 .particle.gold{color:#fbbf24;font-size:20px}
 @keyframes floatUp{0%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-80px) scale(1.2)}}
@@ -188,7 +183,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .skin-card{background:#181826;border:1.5px solid rgba(255,255,255,.08);border-radius:11px;padding:10px;text-align:center;cursor:pointer}
 .skin-card.active{border-color:#5eead4}
 .skin-card.locked{opacity:.4}
-.skin-preview{width:60px;height:60px;border-radius:50%;margin:0 auto 6px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .skin-name{font-size:9px;font-weight:800}
 </style>
 </head>
@@ -279,7 +273,7 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <div class="crate-name" id="crateName"></div>
 </div>
 </div>
-<button class="modal-btn" id="crateOpen">Открыть (стоимость зависит)</button>
+<button class="modal-btn" id="crateOpen">Открыть</button>
 <button class="modal-btn secondary" id="crateClose">Закрыть</button>
 </div></div>
 
@@ -316,7 +310,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 </div></div>
 
 <div class="toast" id="toast"></div>
-
 <script>
 var BRANDS=[
 {cat:"Обувь",name:"Nike",price:50,inc:1,rar:"common"},
@@ -354,21 +347,21 @@ var UPGRADES=[
 {name:"Клик II",price:800,mult:1.6,type:"click",value:5,desc:"+5 к клику",icon:"II"},
 {name:"Клик III",price:12000,mult:1.7,type:"click",value:25,desc:"+25 к клику",icon:"III"},
 {name:"Клик IV",price:200000,mult:1.8,type:"click",value:150,desc:"+150 к клику",icon:"IV"},
-{name:"Мульти-клик I",price:500000,mult:1.7,type:"multiclick",value:2,desc:"1 клик = 2 клика",icon:"x2"},
-{name:"Мульти-клик II",price:8000000,mult:1.8,type:"multiclick",value:5,desc:"1 клик = 5 кликов",icon:"x5"},
-{name:"Авто I",price:8000,mult:1.8,type:"auto",value:1,desc:"+1 авто-клик/сек",icon:"A1"},
-{name:"Авто II",price:150000,mult:1.9,type:"auto",value:5,desc:"+5 авто-клик/сек",icon:"A2"},
+{name:"Мульти I",price:500000,mult:1.7,type:"multiclick",value:2,desc:"1 клик = 2",icon:"x2"},
+{name:"Мульти II",price:8000000,mult:1.8,type:"multiclick",value:5,desc:"1 клик = 5",icon:"x5"},
+{name:"Авто I",price:8000,mult:1.8,type:"auto",value:1,desc:"+1 авто/сек",icon:"A1"},
+{name:"Авто II",price:150000,mult:1.9,type:"auto",value:5,desc:"+5 авто/сек",icon:"A2"},
 {name:"Авто III",price:3000000,mult:2,type:"auto",value:30,desc:"+30 авто/сек",icon:"A3"},
-{name:"Крит-шанс",price:50000,mult:1.7,type:"crit",value:.05,desc:"+5% шанс крита",icon:"C1"},
-{name:"Крит-урон",price:80000,mult:1.7,type:"crit_dmg",value:1,desc:"+1x к урону крита",icon:"D1"},
-{name:"Удача",price:300000,mult:1.6,type:"luck",value:1,desc:"+10% ко всем наградам",icon:"L1"},
-{name:"Золотой клик",price:500000,mult:1.7,type:"gold",value:.01,desc:"+1% шанс золотого клика x10",icon:"G1"},
-{name:"Комбо-мастер",price:1000000,mult:1.7,type:"combo",value:1,desc:"+1 сек комбо",icon:"K1"}
+{name:"Крит-шанс",price:50000,mult:1.7,type:"crit",value:.05,desc:"+5% крит",icon:"C1"},
+{name:"Крит-урон",price:80000,mult:1.7,type:"crit_dmg",value:1,desc:"+1x крит-урон",icon:"D1"},
+{name:"Удача",price:300000,mult:1.6,type:"luck",value:1,desc:"+10% награды",icon:"L1"},
+{name:"Золотой клик",price:500000,mult:1.7,type:"gold",value:.01,desc:"+1% золотой клик x10",icon:"G1"},
+{name:"Комбо",price:1000000,mult:1.7,type:"combo",value:1,desc:"+1 сек комбо",icon:"K1"}
 ];
 var PETS={
 cat:{n:"Кот Мурзик",e:"🐱",price:0,bonus:{type:"click",value:2},desc:"+2 к клику"},
 dog:{n:"Пёс Бублик",e:"🐶",price:5000,bonus:{type:"income",value:.1},desc:"+10% к доходу"},
-hamster:{n:"Хомяк Семён",e:"🐹",price:30000,bonus:{type:"auto",value:2},desc:"+2 авто-клик"},
+hamster:{n:"Хомяк Семён",e:"🐹",price:30000,bonus:{type:"auto",value:2},desc:"+2 авто"},
 parrot:{n:"Попугай Кеша",e:"🦜",price:150000,bonus:{type:"crit",value:.1},desc:"+10% крит"},
 fish:{n:"Рыбка Золотая",e:"🐠",price:800000,bonus:{type:"luck",value:2},desc:"+20% награды"},
 rabbit:{n:"Кролик Пушок",e:"🐰",price:4000000,bonus:{type:"income",value:.25},desc:"+25% к доходу"},
@@ -380,7 +373,6 @@ var ACHS=[
 {n:"Кликер 100",d:"100 кликов",f:function(s){return s.clicks>=100}},
 {n:"Кликер 1000",d:"1000 кликов",f:function(s){return s.clicks>=1000}},
 {n:"Кликер 10000",d:"10000 кликов",f:function(s){return s.clicks>=10000}},
-{n:"Кликер 100000",d:"100000 кликов",f:function(s){return s.clicks>=100000}},
 {n:"Первый бренд",d:"Купить 1 бренд",f:function(s){return s.owned.length>=1}},
 {n:"Коллекционер",d:"10 брендов",f:function(s){return s.owned.length>=10}},
 {n:"Магнат моды",d:"20 брендов",f:function(s){return s.owned.length>=20}},
@@ -404,19 +396,19 @@ var ACHS=[
 {n:"Уровень 25",d:"Уровень 25",f:function(s){return s.lvl>=25}},
 {n:"Уровень 50",d:"Уровень 50",f:function(s){return s.lvl>=50}},
 {n:"Крутила",d:"100 вращений",f:function(s){return s.wheelTotal>=100}},
-{n:"Streak 3",d:"Серия входов 3 дня",f:function(s){return s.streak>=3}},
-{n:"Streak 7",d:"Серия входов 7 дней",f:function(s){return s.streak>=7}},
-{n:"Streak 30",d:"Серия 30 дней",f:function(s){return s.streak>=30}},
+{n:"Streak 3",d:"3 дня подряд",f:function(s){return s.streak>=3}},
+{n:"Streak 7",d:"7 дней подряд",f:function(s){return s.streak>=7}},
+{n:"Streak 30",d:"30 дней подряд",f:function(s){return s.streak>=30}},
 {n:"Скины 3",d:"3 скина",f:function(s){return s.skins.length>=3}},
 {n:"Скины все",d:"Все скины",f:function(s){return s.skins.length>=SKINS.length}},
 {n:"Пропуск 10",d:"Пропуск ур. 10",f:function(s){return s.passLvl>=10}},
 {n:"Пропуск 25",d:"Пропуск ур. 25",f:function(s){return s.passLvl>=25}},
 {n:"Донат 5",d:"5 покупок доната",f:function(s){return s.donations.length>=5}},
 {n:"Донат 10",d:"10 покупок доната",f:function(s){return s.donations.length>=10}},
-{n:"Кликов в секунду",d:"Комбо x10",f:function(s){return s.maxCombo>=10}},
-{n:"Про-кликер",d:"Комбо x50",f:function(s){return s.maxCombo>=50}},
-{n:"Удача",d:"5 удач улучшено",f:function(s){return s.luckBonus>=5}},
-{n:"Топ-1",d:"Заработать больше всех",f:function(s){return s.earned>=1e10}}
+{n:"Комбо x10",d:"Комбо x10",f:function(s){return s.maxCombo>=10}},
+{n:"Комбо x50",d:"Комбо x50",f:function(s){return s.maxCombo>=50}},
+{n:"Удача",d:"5 удач",f:function(s){return s.luckBonus>=5}},
+{n:"Топ-1",d:"Огромный заработок",f:function(s){return s.earned>=1e10}}
 ];
 var SKINS=[
 {id:"default",n:"Стандартный",css:"",price:0},
@@ -449,11 +441,11 @@ var EVENTS=[
 var DONATE=[
 {id:"money1k",e:"💰",n:"Стартовый капитал",d:"+$10,000 сразу",ads:1,effect:{type:"money",v:10000}},
 {id:"money100k",e:"💰",n:"Крупная сумма",d:"+$100,000 сразу",ads:2,effect:{type:"money",v:100000}},
-{id:"x2",e:"⚡",n:"2x Доход",d:"Умножает ВЕСЬ доход на 2 навсегда",ads:1,effect:{type:"mult",v:2}},
-{id:"x4",e:"🔥",n:"4x Доход",d:"Умножает ВЕСЬ доход на 4 навсегда",ads:3,effect:{type:"mult",v:4}},
-{id:"x10",e:"💎",n:"10x Доход",d:"Умножает ВЕСЬ доход на 10 навсегда",ads:5,effect:{type:"mult",v:10}},
-{id:"x20",e:"👑",n:"20x Доход",d:"Умножает ВЕСЬ доход на 20 навсегда",ads:10,effect:{type:"mult",v:20}},
-{id:"click10",e:"👆",n:"Клик x10",d:"Умножает силу клика на 10 навсегда",ads:3,effect:{type:"clickmult",v:10}},
+{id:"x2",e:"⚡",n:"2x Доход",d:"Умножает доход на 2",ads:1,effect:{type:"mult",v:2}},
+{id:"x4",e:"🔥",n:"4x Доход",d:"Умножает доход на 4",ads:3,effect:{type:"mult",v:4}},
+{id:"x10",e:"💎",n:"10x Доход",d:"Умножает доход на 10",ads:5,effect:{type:"mult",v:10}},
+{id:"x20",e:"👑",n:"20x Доход",d:"Умножает доход на 20",ads:10,effect:{type:"mult",v:20}},
+{id:"click10",e:"👆",n:"Клик x10",d:"Умножает клик на 10",ads:3,effect:{type:"clickmult",v:10}},
 {id:"starter",e:"🎁",n:"Стартовый набор",d:"+$50,000 и 5 вращений",ads:2,effect:{type:"pack",money:50000,spins:5}}
 ];
 var PASS_REWARDS=[
@@ -699,12 +691,11 @@ var amt=base;
 if(isCrit)amt*=getCritDmg();
 if(S.boostEnd>Date.now())amt*=S.boost;
 amt*=getLuckMult();
-S.money+=amt;S.earned+=amt;S.clicks++;
 S.combo++;
 if(S.combo>S.maxCombo)S.maxCombo=S.combo;
 var comboMult=1+Math.floor(S.combo/10)*0.5;
 amt*=comboMult;
-S.money+=amt*(comboMult-1);S.earned+=amt*(comboMult-1);
+S.money+=amt;S.earned+=amt;S.clicks++;
 clearTimeout(comboTimeout);
 comboTimeout=setTimeout(function(){S.combo=0;updateCombo()},getComboDuration()*1000);
 updateCombo();
@@ -720,7 +711,7 @@ function updateCombo(){
 var badge=document.getElementById("comboBadge");
 if(S.combo>=5){
 var mult=1+Math.floor(S.combo/10)*0.5;
-badge.textContent="COMBO x"+S.combo+"  (+"+Math.round((mult-1)*100)+"%)";
+badge.textContent="COMBO x"+S.combo+" (+"+Math.round((mult-1)*100)+"%)";
 badge.classList.add("show");
 }else{
 badge.classList.remove("show");
@@ -756,19 +747,13 @@ renderUpg();renderHeader();checkAch();save();
 function buyPet(id){
 var pet=PETS[id];
 if(S.pets.indexOf(id)!==-1){
-if(S.activePets.length<3&&S.activePets.indexOf(id)===-1){
-S.activePets.push(id);
-save();renderPets();renderHeader();
-toast(pet.n+" активирован!");
-return;
-}
 if(S.activePets.indexOf(id)!==-1){
 S.activePets=S.activePets.filter(function(x){return x!==id});
-save();renderPets();renderHeader();
-toast(pet.n+" убран");
-return;
+}else{
+if(S.activePets.length>=3){toast("Максимум 3 активных");return}
+S.activePets.push(id);
 }
-toast("Максимум 3 активных");
+save();renderPets();renderHeader();
 return;
 }
 if(S.money<pet.price){toast("Мало денег!");return}
@@ -777,7 +762,7 @@ S.pets.push(id);
 S.petLvls[id]=1;
 if(S.activePets.length<3)S.activePets.push(id);
 sWin();
-toast(pet.n+" присоединился!");
+toast(pet.n+" куплен!");
 renderPets();renderHeader();checkAch();save();
 }
 function upgradePet(id){
@@ -826,20 +811,14 @@ c.innerHTML='<div class="pet-emoji">'+p.e+'</div>'+
 '<div class="pet-bonus">'+p.desc+'</div>'+
 (owned?'<div class="pet-lvl">Ур. '+lv+'</div>':
 '<div class="price" style="margin-top:5px">$'+fmt(p.price)+'</div>');
-c.onclick=function(){
+c.onclick=function(){buyPet(id)};
 if(owned){
-buyPet(id);
-}else if(aff){
-buyPet(id);
-}
-};
-if(owned){
-var upBtn=document.createElement("button");
-upBtn.className="btn aff";
-upBtn.style.marginTop="5px";
-upBtn.textContent="Кормить ($"+fmt(Math.floor(p.price*0.5*lv))+")";
-upBtn.onclick=function(e){e.stopPropagation();upgradePet(id)};
-c.appendChild(upBtn);
+var up=document.createElement("button");
+up.className="btn aff";
+up.style.marginTop="5px";
+up.textContent="Кормить ($"+fmt(Math.floor(p.price*0.5*lv))+")";
+up.onclick=function(e){e.stopPropagation();upgradePet(id)};
+c.appendChild(up);
 }
 g.appendChild(c);
 })(id);
@@ -1001,8 +980,8 @@ var owned=S.skins.indexOf(sk.id)!==-1;
 var active=S.activeSkin===sk.id;
 var c=document.createElement("div");
 c.className="skin-card"+(active?" active":"")+(owned?"":" locked");
-var cls=sk.css?"click-btn "+sk.css:"click-btn";
-c.innerHTML='<div class="skin-preview '+cls+'" style="width:60px;height:60px;border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.4)"></div>'+
+var cls=sk.css?("click-btn "+sk.css):"click-btn";
+c.innerHTML='<div style="width:60px;height:60px;border-radius:50%;margin:0 auto 6px;box-shadow:0 6px 20px rgba(0,0,0,.4)" class="'+cls+'"></div>'+
 '<div class="skin-name">'+sk.n+'</div>'+
 (owned?(active?'<div style="font-size:8px;color:#5eead4;margin-top:3px">✓ Активен</div>':'<div style="font-size:8px;color:#5a5a72;margin-top:3px">Выбрать</div>'):
 '<div class="price" style="margin-top:3px">$'+fmt(sk.price)+'</div>');
@@ -1036,7 +1015,7 @@ var CRATE_REWARDS=[
 {rar:"rare",name:"Крупные деньги",weight:10,fn:function(){var v=100000*getLuckMult();S.money+=v;S.earned+=v}},
 {rar:"epic",name:"Буст x5",weight:4,fn:function(){S.boost=5;S.boostEnd=Date.now()+120000}},
 {rar:"legendary",name:"Буст x20",weight:0.8,fn:function(){S.boost=20;S.boostEnd=Date.now()+180000}},
-{rar:"mythic",name:"Множитель дохода x2 навсегда",weight:0.2,fn:function(){S.donateMult=(S.donateMult||1)*2}}
+{rar:"mythic",name:"Множитель x2 навсегда",weight:0.2,fn:function(){S.donateMult=(S.donateMult||1)*2}}
 ];
 function doCrateOpen(silent){
 var cost=Math.max(1000,Math.floor(S.money*0.02));
@@ -1139,11 +1118,8 @@ if(S.lastLogin===today)return;
 var d=new Date();
 d.setDate(d.getDate()-1);
 var yKey=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-if(S.lastLogin===yKey){
-S.streak++;
-}else{
-S.streak=1;
-}
+if(S.lastLogin===yKey)S.streak++;
+else S.streak=1;
 S.lastLogin=today;
 save();
 }
@@ -1398,19 +1374,19 @@ l.appendChild(d);
 function renderStats(){
 var g=document.getElementById("statsGrid");
 var items=[
-["Всего заработано","$"+fmt(S.earned)],
-["Всего кликов",fmt(S.clicks)],
-["Бренды",S.owned.length+" / "+BRANDS.length],
-["Питомцы",S.pets.length+" / "+Object.keys(PETS).length],
-["Достижения",Object.values(S.ach).filter(function(v){return v}).length+" / "+ACHS.length],
+["Заработано","$"+fmt(S.earned)],
+["Кликов",fmt(S.clicks)],
+["Бренды",S.owned.length+"/"+BRANDS.length],
+["Питомцы",S.pets.length+"/"+Object.keys(PETS).length],
+["Достижения",Object.values(S.ach).filter(function(v){return v}).length+"/"+ACHS.length],
 ["Престижей",S.pc],
 ["Круток",S.wheelTotal],
 ["Сундуков",S.cratesOpened],
 ["Легендарок",S.legendaryFound],
 ["Мификов",S.mythicFound],
 ["Уровень",S.lvl],
-["Streak",S.streak+" дн."],
-["Макс. комбо",S.maxCombo],
+["Streak",S.streak+"д"],
+["Комбо",S.maxCombo],
 ["Реклам",S.adsWatched||0]
 ];
 g.innerHTML=items.map(function(it){
@@ -1527,40 +1503,11 @@ if(S.lastWheelReset!==todayKey()){
 S.wheelSpins=Math.max(S.wheelSpins||0,3);
 S.lastWheelReset=todayKey();
 }
-try{
-load();
-}catch(e){console.log("load error:",e)}
 
-try{
-applySkin();
-}catch(e){console.log("skin error:",e)}
-
-try{
-checkStreak();
-}catch(e){console.log("streak error:",e)}
-
-try{
-renderAll();
-}catch(e){
-console.log("render error:",e);
-alert("Ошибка: "+e.message);
-}
-
-try{
-setInterval(function(){
-var inc=getIncome()/10;
-S.money+=inc;S.earned+=inc;
-var auto=getAutoRate();
-if(auto>0){
-var autoAmt=auto/10*getClickPower();
-if(S.boostEnd>Date.now())autoAmt*=S.boost;
-autoAmt*=getLuckMult();
-S.money+=autoAmt;S.earned+=autoAmt;
-}
-renderHeader();
-},100);
-}catch(e){console.log("loop error:",e)}
-
+try{checkStreak()}catch(e){console.log("streak:",e)}
+try{load()}catch(e){console.log("load:",e)}
+try{applySkin()}catch(e){console.log("skin:",e)}
+try{renderAll()}catch(e){alert("Ошибка: "+e.message);console.log(e)}
 </script>
 </body>
 </html>
