@@ -20,9 +20,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .click-area{padding:14px;display:flex;flex-direction:column;align-items:center;position:relative}
 .click-btn{width:150px;height:150px;border-radius:50%;border:none;background:linear-gradient(135deg,#ff5fa2,#a78bfa);color:#fff;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 15px 50px rgba(255,95,162,.4),0 0 0 8px rgba(255,95,162,.1);transition:transform .1s,background .3s}
 .click-btn:active{transform:scale(.94)}
-.click-btn.golden{background:linear-gradient(135deg,#fbbf24,#fb923c);box-shadow:0 15px 50px rgba(251,191,36,.6),0 0 0 8px rgba(251,191,36,.2);animation:pulse .5s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
-@keyframes rainbow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .click-power{margin-top:8px;font-size:10px;color:#a0a0b8}
 .click-power span{color:#5eead4;font-weight:800}
 .quick-actions{display:flex;gap:6px;padding:0 10px 10px;justify-content:center;flex-wrap:wrap}
@@ -138,12 +135,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 .daily-day.today{background:linear-gradient(135deg,rgba(255,95,162,.2),rgba(167,139,250,.2));border-color:#ff5fa2;color:#ff5fa2}
 .daily-num{font-size:7px;opacity:.7}
 .daily-val{font-size:9px;font-weight:900}
-.wheel-container{position:relative;width:240px;height:240px;margin:0 auto 14px}
-.wheel{width:100%;height:100%;border-radius:50%;transition:transform 4s cubic-bezier(.17,.67,.12,.99);box-shadow:0 0 0 8px #202032,0 0 0 12px rgba(255,255,255,.16),0 20px 60px rgba(0,0,0,.5);background:conic-gradient(#ff5fa2 0deg 45deg,#a78bfa 45deg 90deg,#5eead4 90deg 135deg,#fbbf24 135deg 180deg,#60a5fa 180deg 225deg,#f87171 225deg 270deg,#22c55e 270deg 315deg,#fb923c 315deg 360deg)}
-.wheel-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:22px solid #fbbf24;z-index:2}
-.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#0a0a0f;border:3px solid #fbbf24;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fbbf24;z-index:1}
-.wheel-labels{position:absolute;inset:0;pointer-events:none}
-.wheel-label{position:absolute;font-size:9px;font-weight:900;color:#0a0a0f;text-shadow:0 1px 1px rgba(255,255,255,.4);white-space:nowrap}
 .lucky-box{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(255,95,162,.15));border:1.5px solid #fbbf24;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px}
 .lucky-box-title{font-size:14px;font-weight:900;color:#fbbf24;margin-bottom:4px}
 .lucky-box-desc{font-size:10px;color:#a0a0b8;margin-bottom:12px}
@@ -208,7 +199,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <div class="quick-actions">
 <button class="qa-btn" id="dailyBtn">🎁 Бонус<span class="qa-dot" id="dailyDot" style="display:none"></span></button>
 <button class="qa-btn" id="crateBtn">🎁 Сундуки</button>
-<button class="qa-btn" id="wheelBtn">🎡 Колесо</button>
 <button class="qa-btn" id="luckyBtn">🎰 Кейс</button>
 <button class="qa-btn" id="eventBtn">⚡ Событие</button>
 <button class="qa-btn" id="donateBtn">💎 Донат</button>
@@ -233,7 +223,7 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <div class="panel" id="p-pets"><div class="section-title">Питомцы</div><div style="font-size:10px;color:#a0a0b8;margin-bottom:10px">Активных можно 3. Корми их, чтобы повысить уровень.</div><div class="grid" id="petsGrid"></div></div>
 <div class="panel" id="p-miss"><div class="section-title">Ежедневные задания</div><div id="missionsList"></div></div>
 <div class="panel" id="p-pass"><div class="section-title">Сезонный пропуск</div><div style="font-size:10px;color:#a0a0b8;margin-bottom:8px">Премиум ряд: <b style="color:#fbbf24">12 реклам</b></div><button class="modal-btn" id="unlockPrem">🔓 Открыть премиум (12 реклам)</button><div class="pass-track" id="passTrack"></div></div>
-<div class="panel" id="p-skins"><div class="section-title">Скины кнопки</div><div style="font-size:10px;color:#a0a0b8;margin-bottom:10px">Открывай скины из сундуков.</div><div class="grid" id="skinsGrid"></div></div>
+<div class="panel" id="p-skins"><div class="section-title">Скины кнопки</div><div style="font-size:10px;color:#a0a0b8;margin-bottom:10px">Открывай скины из пропуска или покупай.</div><div class="grid" id="skinsGrid"></div></div>
 <div class="panel" id="p-ach"><div class="ach-prog">Открыто: <span id="achCount">0 / 0</span></div><div id="achList"></div></div>
 <div class="panel" id="p-lb"><div class="section-title">Топ игроков</div><div id="lbList"></div></div>
 <div class="panel" id="p-stats"><div class="section-title">Статистика</div><div class="stats-grid" id="statsGrid"></div></div>
@@ -277,14 +267,6 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 <button class="modal-btn secondary" id="crateClose">Закрыть</button>
 </div></div>
 
-<div class="modal-overlay" id="wheelModal"><div class="modal">
-<div class="modal-title">🎡 Колесо фортуны</div>
-<div class="modal-desc" id="wheelDesc">Крути!</div>
-<div class="wheel-container"><div class="wheel-pointer"></div><div class="wheel" id="wheel"></div><div class="wheel-labels" id="wheelLabels"></div><div class="wheel-center">SPIN</div></div>
-<button class="modal-btn" id="wheelSpin">Крутить</button>
-<button class="modal-btn secondary" id="wheelClose">Закрыть</button>
-</div></div>
-
 <div class="modal-overlay" id="luckyModal"><div class="modal">
 <div class="modal-title">🎰 Счастливый кейс</div>
 <div class="modal-desc">Случайная награда!</div>
@@ -310,6 +292,7 @@ body{font-family:Arial,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh
 </div></div>
 
 <div class="toast" id="toast"></div>
+
 <script>
 var BRANDS=[
 {cat:"Обувь",name:"Nike",price:50,inc:1,rar:"common"},
@@ -395,7 +378,6 @@ var ACHS=[
 {n:"Уровень 10",d:"Уровень 10",f:function(s){return s.lvl>=10}},
 {n:"Уровень 25",d:"Уровень 25",f:function(s){return s.lvl>=25}},
 {n:"Уровень 50",d:"Уровень 50",f:function(s){return s.lvl>=50}},
-{n:"Крутила",d:"100 вращений",f:function(s){return s.wheelTotal>=100}},
 {n:"Streak 3",d:"3 дня подряд",f:function(s){return s.streak>=3}},
 {n:"Streak 7",d:"7 дней подряд",f:function(s){return s.streak>=7}},
 {n:"Streak 30",d:"30 дней подряд",f:function(s){return s.streak>=30}},
@@ -417,18 +399,13 @@ var SKINS=[
 {id:"dark",n:"Тёмный",css:"skin-dark",price:1000000},
 {id:"rainbow",n:"Радужный",css:"skin-rainbow",price:5000000}
 ];
-var DAILY=[1000,5000,25000,"boost",250000,"spin",2000000];
-var WHEEL=[
-{l:"$5K",v:5000},{l:"$50K",v:50000},{l:"$250K",v:250000},
-{l:"BOOST x3",v:"b3"},{l:"$2M",v:2000000},{l:"$20M",v:20000000},
-{l:"BOOST x5",v:"b5"},{l:"PETS",v:"egg"}
-];
+var DAILY=[1000,5000,25000,"boost",250000,"wheel",2000000];
 var MISSION_TPL=[
 {id:"click",n:"Сделать 100 кликов",ic:"👆",t:100,r:{t:"money",v:5000}},
 {id:"buy",n:"Купить 2 бренда",ic:"🏪",t:2,r:{t:"money",v:15000}},
 {id:"upg",n:"Купить 1 улучшение",ic:"⚡",t:1,r:{t:"money",v:20000}},
 {id:"earn",n:"Заработать $100K",ic:"💰",t:100000,r:{t:"boost",v:3,d:60}},
-{id:"click2",n:"500 кликов",ic:"🔥",t:500,r:{t:"wheel",v:1}},
+{id:"click2",n:"500 кликов",ic:"🔥",t:500,r:{t:"money",v:50000}},
 {id:"crate",n:"Открыть сундук",ic:"🎁",t:1,r:{t:"money",v:30000}}
 ];
 var EVENTS=[
@@ -452,13 +429,13 @@ var PASS_REWARDS=[
 {lvl:1,t:"free",r:{t:"money",v:5000},lb:"$5K"},
 {lvl:2,t:"prem",r:{t:"boost",v:3,d:60},lb:"x3"},
 {lvl:3,t:"free",r:{t:"money",v:25000},lb:"$25K"},
-{lvl:4,t:"prem",r:{t:"wheel",v:3},lb:"🎡"},
+{lvl:4,t:"prem",r:{t:"crate",v:3},lb:"🎁x3"},
 {lvl:5,t:"free",r:{t:"money",v:100000},lb:"$100K"},
-{lvl:6,t:"prem",r:{t:"crate",v:3},lb:"🎁x3"},
+{lvl:6,t:"prem",r:{t:"boost",v:5,d:120},lb:"x5"},
 {lvl:7,t:"free",r:{t:"money",v:1000000},lb:"$1M"},
-{lvl:8,t:"prem",r:{t:"boost",v:5,d:120},lb:"x5"},
+{lvl:8,t:"prem",r:{t:"skin",v:"diamond"},lb:"💎"},
 {lvl:9,t:"free",r:{t:"money",v:5000000},lb:"$5M"},
-{lvl:10,t:"prem",r:{t:"skin",v:"diamond"},lb:"💎"},
+{lvl:10,t:"prem",r:{t:"money",v:50000000},lb:"$50M"},
 {lvl:12,t:"free",r:{t:"money",v:20000000},lb:"$20M"},
 {lvl:15,t:"prem",r:{t:"skin",v:"fire"},lb:"🔥"},
 {lvl:18,t:"free",r:{t:"money",v:100000000},lb:"$100M"},
@@ -487,7 +464,6 @@ Object.keys(PETS).forEach(function(id){S.petLvls[id]=1});
 
 var curCat="Обувь";
 var actx=null;
-var spinning=false,wheelRot=0;
 var comboTimeout=null;
 
 function initAudio(){
@@ -554,9 +530,13 @@ p.style.top="150px";
 document.body.appendChild(p);
 setTimeout(function(){p.remove()},1000);
 }
-
+function achBonus(){
+var c=0;
+ACHS.forEach(function(a){if(S.ach[a.n])c++});
+return c*0.01;
+}
 function getLuckMult(){
-var m=1+S.luckBonus*.1+S.achBonus();
+var m=1+S.luckBonus*.1+achBonus();
 if(S.activePets){
 S.activePets.forEach(function(id){
 var b=PETS[id]&&PETS[id].bonus;
@@ -580,11 +560,6 @@ if(b.type==="all")v+=b.value*lv;
 });
 }
 return v;
-}
-function achBonus(){
-var c=0;
-ACHS.forEach(function(a){if(S.ach[a.n])c++});
-return c*0.01;
 }
 function getClickPower(){
 var cp=S.cp+getPetBonus("click");
@@ -929,7 +904,6 @@ m.claimed=true;
 var r=t.r;
 if(r.t==="money"){S.money+=r.v;S.earned+=r.v;toast("+"+fmt(r.v))}
 else if(r.t==="boost"){S.boost=r.v;S.boostEnd=Date.now()+r.d*1000;toast("Буст x"+r.v)}
-else if(r.t==="wheel"){S.wheelSpins+=r.v;toast("+"+r.v+" вращений")}
 sWin();
 renderMissions();renderHeader();save();
 }
@@ -964,7 +938,6 @@ S.passClaimed.push(key);
 var rr=r.r;
 if(rr.t==="money"){S.money+=rr.v;S.earned+=rr.v;toast("+"+fmt(rr.v))}
 else if(rr.t==="boost"){S.boost=rr.v;S.boostEnd=Date.now()+rr.d*1000;toast("Буст x"+rr.v)}
-else if(rr.t==="wheel"){S.wheelSpins+=rr.v;toast("+"+rr.v+" вращений")}
 else if(rr.t==="crate"){for(var i=0;i<rr.v;i++)doCrateOpen(true);toast("+"+rr.v+" сундуков")}
 else if(rr.t==="skin"){
 if(S.skins.indexOf(rr.v)===-1){S.skins.push(rr.v);toast("Скин: "+SKINS.find(function(x){return x.id===rr.v}).n)}
@@ -1081,7 +1054,7 @@ var d=document.createElement("div");
 d.className="daily-day";
 if(i<streak)d.classList.add("claimed");
 if(can&&i===streak)d.classList.add("today");
-var lbl=typeof DAILY[i]==="number"?"$"+fmt(DAILY[i]):DAILY[i]==="boost"?"X5":"SPIN";
+var lbl=typeof DAILY[i]==="number"?"$"+fmt(DAILY[i]):DAILY[i]==="boost"?"X5":"BONUS";
 d.innerHTML='<div class="daily-num">Д'+(i+1)+'</div><div class="daily-val">'+lbl+'</div>';
 grid.appendChild(d);
 }
@@ -1101,9 +1074,6 @@ toast("+"+fmt(amt));
 }else if(r==="boost"){
 S.boost=5;S.boostEnd=Date.now()+60000;
 toast("Буст x5!");
-}else if(r==="spin"){
-S.wheelSpins=(S.wheelSpins||0)+3;
-toast("+3 вращения!");
 }
 S.dailyStreak=Math.min(streak+1,7);
 S.lastDaily=todayKey();
@@ -1122,83 +1092,6 @@ if(S.lastLogin===yKey)S.streak++;
 else S.streak=1;
 S.lastLogin=today;
 save();
-}
-function openWheel(){
-updateWheelDesc();
-drawWheelLabels();
-document.getElementById("wheelModal").classList.add("show");
-}
-function drawWheelLabels(){
-var box=document.getElementById("wheelLabels");
-if(!box)return;
-box.innerHTML="";
-var n=WHEEL.length;
-var seg=360/n;
-var radius=88;
-WHEEL.forEach(function(p,i){
-var angle=(i*seg+seg/2)-90;
-var rad=angle*Math.PI/180;
-var x=120+Math.cos(rad)*radius;
-var y=120+Math.sin(rad)*radius;
-var lbl=document.createElement("div");
-lbl.className="wheel-label";
-lbl.textContent=p.l;
-lbl.style.left=x+"px";
-lbl.style.top=y+"px";
-lbl.style.transform="translate(-50%,-50%) rotate("+(angle+90)+"deg)";
-box.appendChild(lbl);
-});
-}
-function updateWheelDesc(){
-document.getElementById("wheelDesc").textContent="Попыток: "+(S.wheelSpins||0);
-document.getElementById("wheelSpin").disabled=(S.wheelSpins||0)<=0||spinning;
-}
-function spinWheel(useFree){
-if(spinning)return;
-if(useFree&&(S.wheelSpins||0)<=0){toast("Нет попыток!");return}
-spinning=true;
-if(useFree)S.wheelSpins--;
-S.wheelTotal++;
-var idx=Math.floor(Math.random()*WHEEL.length);
-var seg=360/WHEEL.length;
-var target=360*6+(360-(idx*seg+seg/2));
-wheelRot+=target;
-document.getElementById("wheel").style.transform="rotate("+wheelRot+"deg)";
-setTimeout(function(){
-applyWheel(WHEEL[idx]);
-spinning=false;
-updateWheelDesc();
-checkAch();
-},4200);
-}
-function applyWheel(p){
-if(typeof p.v==="number"){
-var amt=p.v*getLuckMult();
-S.money+=amt;S.earned+=amt;
-toast(p.l+"! +$"+fmt(amt));
-sWin();
-}else if(p.v==="b3"){
-S.boost=3;S.boostEnd=Date.now()+60000;
-toast("Буст x3!");
-sWin();
-}else if(p.v==="b5"){
-S.boost=5;S.boostEnd=Date.now()+60000;
-toast("Буст x5!");
-sWin();
-}else if(p.v==="egg"){
-var no=Object.keys(PETS).filter(function(id){return S.pets.indexOf(id)===-1});
-if(no.length){
-var id=no[Math.floor(Math.random()*no.length)];
-S.pets.push(id);S.petLvls[id]=1;
-if(S.activePets.length<3)S.activePets.push(id);
-toast("Питомец: "+PETS[id].n);
-sWin();
-}else{
-S.money+=1000000;S.earned+=1000000;
-toast("+$1M");
-}
-}
-renderAll();save();
 }
 function openLucky(){
 var now=Date.now();
@@ -1222,8 +1115,6 @@ if(r<.3){
 var v=10000*getLuckMult();S.money+=v;S.earned+=v;toast("+$"+fmt(v));
 }else if(r<.55){
 S.boost=3;S.boostEnd=Date.now()+60000;toast("Буст x3!");
-}else if(r<.75){
-S.wheelSpins=(S.wheelSpins||0)+2;toast("+2 вращения!");
 }else if(r<.9){
 var v=250000*getLuckMult();S.money+=v;S.earned+=v;toast("+$"+fmt(v));
 }else{
@@ -1321,7 +1212,7 @@ var e=d.effect;
 if(e.type==="money"){var v=e.v*getLuckMult();S.money+=v;S.earned+=v;toast("+"+fmt(v))}
 else if(e.type==="mult"){S.donateMult=(S.donateMult||1)*e.v;toast("Множитель x"+e.v+"!")}
 else if(e.type==="clickmult"){S.donateClickMult=(S.donateClickMult||1)*e.v;toast("Клик x"+e.v+"!")}
-else if(e.type==="pack"){S.money+=e.money;S.earned+=e.money;S.wheelSpins=(S.wheelSpins||0)+e.spins;toast("Набор получен!")}
+else if(e.type==="pack"){S.money+=e.money;S.earned+=e.money;toast("Набор получен!")}
 sWin();
 renderAll();save();
 openDonate();
@@ -1380,14 +1271,14 @@ var items=[
 ["Питомцы",S.pets.length+"/"+Object.keys(PETS).length],
 ["Достижения",Object.values(S.ach).filter(function(v){return v}).length+"/"+ACHS.length],
 ["Престижей",S.pc],
-["Круток",S.wheelTotal],
 ["Сундуков",S.cratesOpened],
 ["Легендарок",S.legendaryFound],
 ["Мификов",S.mythicFound],
 ["Уровень",S.lvl],
 ["Streak",S.streak+"д"],
 ["Комбо",S.maxCombo],
-["Реклам",S.adsWatched||0]
+["Реклам",S.adsWatched||0],
+["Пропуск",S.passLvl]
 ];
 g.innerHTML=items.map(function(it){
 return '<div class="stat-box"><div class="stat-box-v">'+it[1]+'</div>'+
@@ -1430,7 +1321,6 @@ Object.keys(PETS).forEach(function(id){if(!S.petLvls[id])S.petLvls[id]=1});
 document.getElementById("clickBtn").onclick=function(){doClick()};
 document.getElementById("dailyBtn").onclick=openDaily;
 document.getElementById("crateBtn").onclick=openCrate;
-document.getElementById("wheelBtn").onclick=openWheel;
 document.getElementById("luckyBtn").onclick=openLucky;
 document.getElementById("eventBtn").onclick=triggerEvent;
 document.getElementById("donateBtn").onclick=openDonate;
@@ -1438,8 +1328,6 @@ document.getElementById("crateOpen").onclick=function(){doCrateOpen(false)};
 document.getElementById("crateClose").onclick=function(){document.getElementById("crateModal").classList.remove("show")};
 document.getElementById("dailyClaim").onclick=claimDaily;
 document.getElementById("dailyClose").onclick=function(){document.getElementById("dailyModal").classList.remove("show")};
-document.getElementById("wheelSpin").onclick=function(){spinWheel(true)};
-document.getElementById("wheelClose").onclick=function(){document.getElementById("wheelModal").classList.remove("show")};
 document.getElementById("luckyOpen").onclick=openLuckyCase;
 document.getElementById("luckyClose").onclick=function(){document.getElementById("luckyModal").classList.remove("show")};
 document.getElementById("eventClose").onclick=function(){document.getElementById("eventModal").classList.remove("show")};
@@ -1498,11 +1386,6 @@ setTimeout(boostLoop,60000);
 },60000);
 
 window.addEventListener("beforeunload",save);
-
-if(S.lastWheelReset!==todayKey()){
-S.wheelSpins=Math.max(S.wheelSpins||0,3);
-S.lastWheelReset=todayKey();
-}
 
 try{checkStreak()}catch(e){console.log("streak:",e)}
 try{load()}catch(e){console.log("load:",e)}
