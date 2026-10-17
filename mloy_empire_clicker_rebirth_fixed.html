@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909"><title>MLoY EMPIRE — Fashion Tycoon</title>
+<style>
+:root{--gold:#f4c95d;--gold2:#ffe8a0;--bg:#090a09;--panel:#141613;--muted:#a4a69c;--line:#ffffff12;--green:#a7edb0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#45300d 0,transparent 48%),var(--bg);color:#f6f4ec;font:15px Inter,system-ui,-apple-system,Segoe UI,sans-serif}button{font:inherit;cursor:pointer;transition:.16s}button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}.app{max-width:1200px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 2px 20px;border-bottom:1px solid #f4c95d28}.logo{display:flex;align-items:center;gap:12px}.crown{width:52px;height:52px;display:grid;place-items:center;border:1px solid #c59a31;border-radius:15px;background:linear-gradient(140deg,#47340d,#111);font-size:30px;box-shadow:0 0 28px #f4c95d18}.logo h1{margin:0;font-size:clamp(20px,4vw,29px);font-weight:1000;letter-spacing:1.5px}.logo h1 span{color:var(--gold)}.tag{font-size:10px;color:#aaa18a;letter-spacing:2.5px;margin-top:4px}.top-right{display:flex;align-items:center;gap:8px}.chip{border:1px solid #f4c95d30;background:#17150f;border-radius:999px;padding:9px 12px;color:var(--gold2);font-size:12px}.plain{border:1px solid var(--line);background:#171917;color:#ddd;border-radius:12px;padding:10px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin:20px 0}.panel{background:linear-gradient(145deg,#191b17,#10110f);border:1px solid #f4c95d25;border-radius:23px;box-shadow:0 18px 50px #0004;overflow:hidden}.main{padding:23px;position:relative}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;font-weight:850}.balance{font-size:clamp(36px,6vw,58px);font-weight:1000;letter-spacing:-2px;margin:8px 0 0;overflow-wrap:anywhere}.balance small{font-size:17px;color:var(--gold);letter-spacing:0}.muted{color:var(--muted);font-size:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.stat{padding:12px;border:1px solid #ffffff0d;border-radius:13px;background:#ffffff04}.stat b{display:block;font-size:17px}.stat span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-top:4px}.click-wrap{display:grid;place-items:center;padding:5px 0}.clicker{width:min(220px,57vw);aspect-ratio:1;border-radius:50%;border:2px solid #e8bd48;color:var(--gold2);background:radial-gradient(circle at 35% 25%,#60470d,#1b170b 47%,#080908 75%);box-shadow:0 0 0 8px #f4c95d0b,0 0 45px #f4c95d22,inset 0 0 35px #e6a51c18;display:flex;flex-direction:column;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent}.clicker:active{transform:scale(.95);box-shadow:0 0 0 13px #f4c95d12,0 0 70px #f4c95d55}.clicker .big{font-size:45px;line-height:1.1}.clicker strong{font-size:28px;letter-spacing:3px}.clicker small{font-size:9px;letter-spacing:2px;margin-top:7px}.hint{font-size:11px;color:#9d967f;margin-top:10px;text-align:center}.side{padding:18px;display:flex;flex-direction:column;gap:13px}.daily{background:linear-gradient(120deg,#3c2c0b,#17150f);border:1px solid #f4c95d40;border-radius:17px;padding:15px}.dailyrow{display:flex;align-items:center;justify-content:space-between;gap:10px}.daily h3{font-size:14px;margin:0 0 5px}.daily p{margin:0;font-size:11px;color:#c5bba0}.goldbtn,.buy{border:0;background:linear-gradient(135deg,#ffe7a0,#d6a52b);color:#1b1404;font-weight:950;border-radius:11px;padding:10px 13px;box-shadow:0 5px 18px #d6a52b18}.goldbtn:hover,.buy:hover{filter:brightness(1.08);transform:translateY(-1px)}button:disabled{opacity:.38;filter:grayscale(1);cursor:not-allowed;transform:none!important}.bar{height:6px;border-radius:9px;background:#ffffff13;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b47d17,#ffe9a0);transition:width .2s}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:3px 0 10px}.sectionhead h2{font-size:16px;margin:0}.sectionhead span{font-size:10px;color:var(--muted)}.missions{display:grid;gap:8px}.mission{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--line);border-radius:13px;background:#ffffff03}.mi{width:35px;height:35px;display:grid;place-items:center;background:#f4c95d12;border-radius:10px;font-size:18px}.miinfo{flex:1;min-width:0}.miinfo b{display:block;font-size:12px}.miinfo small{color:var(--muted);font-size:10px}.mission .buy{padding:8px;font-size:10px}.tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 14px;scrollbar-width:thin}.tab{white-space:nowrap;border:1px solid #f4c95d24;background:#141613;color:#b8b8ae;border-radius:12px;padding:11px 15px;font-weight:850;font-size:12px}.tab.active{background:var(--gold);color:#171207;border-color:var(--gold)}.view{display:none}.view.active{display:block}.shophead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:5px 0 14px}.shophead h2{margin:0;font-size:21px}.shophead p{margin:4px 0 0;color:var(--muted);font-size:12px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{border:1px solid #ffffff12;background:linear-gradient(145deg,#191b17,#10110f);border-radius:18px;padding:14px;min-width:0;position:relative;overflow:hidden}.card.owned{border-color:#d7ac3f80}.art{height:100px;border-radius:13px;background:radial-gradient(circle,#58410e,#241d0c 43%,#111 78%);display:grid;place-items:center;font-size:46px;margin-bottom:12px;border:1px solid #f4c95d12}.rarity{color:var(--gold);font-size:9px;text-transform:uppercase;letter-spacing:1.4px;font-weight:950}.card h3{font-size:14px;margin:6px 0}.card p{font-size:11px;color:var(--muted);line-height:1.45;min-height:30px;margin:0 0 10px}.income{font-size:11px;color:#dcd9cc}.income b{color:var(--gold)}.cardbottom{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-top:11px}.price{font-size:11px;font-weight:900}.buy{font-size:10px;padding:9px 10px;white-space:nowrap}.owned-label{color:var(--green);font-size:9px;font-weight:950;letter-spacing:1px}.upgrades{display:grid;gap:9px}.upgrade{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:15px;background:#141613}.upicon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:#f4c95d12;font-size:24px;flex-shrink:0}.updesc{flex:1;min-width:0}.updesc h3{font-size:13px;margin:0 0 4px}.updesc p{font-size:11px;color:var(--muted);margin:0}.upbuy{text-align:right;min-width:98px}.upbuy .price{margin-bottom:7px}.empty{grid-column:1/-1;padding:30px;text-align:center;border:1px dashed #ffffff20;border-radius:16px;color:var(--muted);line-height:1.8}.premium{border-color:#9c78ff55;background:linear-gradient(145deg,#211738,#121018)}.premium .art{background:radial-gradient(circle,#6546a0,#211632 55%,#111)}.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:20px 3px 0;color:#77796f;font-size:10px}.saved{color:var(--green)}.reset{border:1px solid #ffffff1b;background:transparent;color:#999;border-radius:9px;padding:8px;font-size:10px}.toast{position:fixed;z-index:99;left:50%;bottom:20px;transform:translate(-50%,25px);opacity:0;pointer-events:none;padding:12px 17px;border-radius:12px;background:var(--gold);color:#191307;font-weight:950;box-shadow:0 8px 30px #0008;transition:.22s;text-align:center;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}.float{position:fixed;z-index:90;pointer-events:none;color:#ffe9a0;font-weight:1000;text-shadow:0 2px 9px #000;font-size:20px;animation:up .7s ease-out forwards}@keyframes up{to{transform:translateY(-75px) scale(1.1);opacity:0}}.spark{position:absolute;pointer-events:none;animation:pop .65s ease-out forwards}@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(.1);opacity:0}}
+@media(max-width:780px){.app{padding:12px}.hero{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.main{padding:19px}.side{padding:14px}.clicker{width:min(205px,56vw)}}
+@media(max-width:430px){.top{padding-bottom:15px}.chip{display:none}.logo h1{font-size:19px}.crown{width:44px;height:44px}.tag{font-size:8px;letter-spacing:1.6px}.cards{gap:8px}.card{padding:10px}.art{height:78px;font-size:38px}.card h3{font-size:12px}.cardbottom{align-items:stretch;flex-direction:column}.buy{width:100%}.upgrade{gap:8px;padding:10px}.upicon{width:38px;height:38px;font-size:20px}.updesc h3{font-size:11px}.updesc p{font-size:10px}.upbuy{min-width:82px}.balance{font-size:36px}}
+.prestige-box{border:1px solid rgba(240,197,90,.45);border-radius:22px;padding:22px;background:radial-gradient(circle at top right,rgba(240,197,90,.13),transparent 55%),var(--panel);margin-bottom:18px}.prestige-emblem{font-size:54px;color:var(--gold);text-align:center;text-shadow:0 0 30px rgba(240,197,90,.25)}.prestige-stats{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.prestige-box h3{margin:14px 0 8px}.prestige-box p{color:var(--muted);line-height:1.55}.prestige-box .goldbtn{width:100%;margin-top:10px;padding:14px}.prestige-box button:disabled{opacity:.45;cursor:not-allowed}.prestige-upgrades{display:grid;gap:12px}.tab{white-space:nowrap}
+</style>
+</head>
+<body><main class="app">
+<header class="top"><div class="logo"><div class="crown">♛</div><div><h1>MLoY <span>EMPIRE</span></h1><div class="tag">FASHION TYCOON · SEASON 01</div></div></div><div class="top-right"><div class="chip">✦ BUILD YOUR LEGACY</div><button class="plain" id="sound" title="Звук">🔇</button></div></header>
+<section class="hero">
+<div class="panel main"><div class="eyebrow">ИМПЕРИЯ МОДЫ · УРОВЕНЬ <span id="level">1</span></div><div class="balance" id="money">0 <small>₽</small></div><div class="muted">Твой капитал. Твои правила.</div>
+<div class="stats"><div class="stat"><b id="pc">+1 ₽</b><span>за клик</span></div><div class="stat"><b id="cps">0 ₽</b><span>в секунду</span></div><div class="stat"><b id="clicks">0</b><span>кликов</span></div></div>
+<div class="click-wrap"><button class="clicker" id="clicker"><span class="big">♛</span><strong>MLoY</strong><small>НАЖМИ И ЗАРАБОТАЙ</small></button><div class="hint">Кликай. Покупай. Доминируй. 👑</div></div></div>
+<aside class="panel side"><div class="daily"><div class="dailyrow"><div><h3>🎁 Ежедневный дроп</h3><p id="dailyText">Награда ждёт тебя</p></div><button class="goldbtn" id="dailyBtn">Забрать</button></div><div class="bar"><i id="dailyBar"></i></div></div><div><div class="sectionhead"><h2>⚡ Задания</h2><span>Забирай награды</span></div><div class="missions" id="missions"></div></div></aside>
+</section>
+<nav class="tabs"><button class="tab active" data-tab="brands">🏷️ Бренды</button><button class="tab" data-tab="shoes">👟 Кроссовки</button><button class="tab" data-tab="upgrades">⚡ Улучшения</button><button class="tab" data-tab="prestige">♻️ Перерождение</button><button class="tab" data-tab="collection">💎 Коллекция</button><button class="tab" data-tab="profile">📊 Профиль</button><button class="tab" data-tab="donate">💎 Донат</button></nav>
+<section class="view active" id="view-brands"><div class="shophead"><div><h2>Захвати рынок</h2><p>Открывай бренды и строй модную империю.</p></div><span class="chip" id="brandCount">0 / 6</span></div><div class="cards" id="brands"></div></section>
+<section class="view" id="view-shoes"><div class="shophead"><div><h2>Культовые пары</h2><p>Собери коллекцию, о которой мечтают.</p></div><span class="chip" id="shoeCount">0 / 6</span></div><div class="cards" id="shoes"></div></section>
+<section class="view" id="view-upgrades"><div class="shophead"><div><h2>Усиль бизнес</h2><p>Улучшения навсегда увеличивают твою мощь.</p></div></div><div class="upgrades" id="upgrades"></div></section>
+<section class="view" id="view-prestige"><div class="shophead"><div><h2>♻️ Перерождение империи</h2><p>Начни заново, чтобы навсегда усилить следующий забег.</p></div></div><div id="prestigePanel"></div></section>\n<section class="view" id="view-collection"><div class="shophead"><div><h2>Твоя коллекция</h2><p>Все приобретения в одном месте.</p></div></div><div class="cards" id="collection"></div></section>
+<section class="view" id="view-profile"><div class="shophead"><div><h2>Путь к вершине</h2><p>Твоя статистика владельца империи.</p></div></div><div class="cards" id="profile"></div></section>
+<section class="view" id="view-donate"><div class="shophead"><div><h2>💎 VIP-клуб MLoY</h2><p>Премиум-предметы и пакеты. Реальная оплата требует подключения магазина.</p></div><span class="chip">💎 <b id="gems">0</b></span></div><div class="cards" id="donateCards"></div><div class="shophead" style="margin-top:22px"><div><h2>💳 Пакеты кристаллов</h2><p>Примеры цен — реальные платежи пока не подключены.</p></div></div><div class="cards" id="moneyPacks"></div><div class="daily" style="margin-top:14px"><h3>🎁 Бесплатные кристаллы</h3><p>Забирай 10 кристаллов раз в день — донатить для игры необязательно.</p><button class="goldbtn" id="freeGems" style="margin-top:10px">Забрать 10 💎</button></div></section>
+<footer class="foot"><span>MLoY EMPIRE © Fan-made tycoon · бренды принадлежат владельцам</span><span class="saved" id="saveStatus">● Сохранено</span><button class="reset" id="reset">Сбросить прогресс</button></footer>
+</main><div class="toast" id="toast"></div>
+<script>
+(()=>{'use strict';
+const KEY='mloy_empire_html_save_v3';
+const brands=[
+{id:'nike',name:'Nike Store',icon:'✔️',desc:'Спортивный гигант: кроссовки и streetwear.',rarity:'Rare',cost:80,cps:1},
+{id:'adidas',name:'Adidas Originals',icon:'👟',desc:'Культовый спорт-стиль и три полоски.',rarity:'Rare',cost:450,cps:5},
+{id:'supreme',name:'Supreme',icon:'🧢',desc:'Уличный хайп и лимитированные дропы.',rarity:'Epic',cost:2200,cps:20},
+{id:'thenorthface',name:'The North Face',icon:'🧥',desc:'Outdoor-экипировка для городских приключений.',rarity:'Epic',cost:9500,cps:85},
+{id:'gucci',name:'Gucci',icon:'👜',desc:'Люксовая мода и дорогие коллекции.',rarity:'Legendary',cost:42000,cps:350},
+{id:'louisvuitton',name:'Louis Vuitton',icon:'💎',desc:'Максимальный престиж fashion-империи.',rarity:'Mythic',cost:200000,cps:1600}];
+const shoes=[
+{id:'air',name:'Air-style Sneakers',icon:'👟',desc:'Легендарный баскетбольный силуэт в твоей коллекции.',rarity:'Common',cost:150,cps:1},
+{id:'superstar',name:'Adidas Superstar',icon:'⭐',desc:'Классика уличного стиля.',rarity:'Rare',cost:850,cps:4},
+{id:'campus',name:'Adidas Campus',icon:'🟩',desc:'Замшевый вайб для повседневных образов.',rarity:'Rare',cost:3800,cps:16},
+{id:'jordan',name:'Jordan Retro',icon:'🏀',desc:'Баскетбольная легенда для коллекционеров.',rarity:'Epic',cost:17000,cps:70},
+{id:'guccisneaker',name:'Gucci Ace',icon:'✨',desc:'Премиальная пара для luxury-гардероба.',rarity:'Legendary',cost:85000,cps:330},
+{id:'lvtrainer',name:'LV Trainer',icon:'👑',desc:'Редкая люксовая пара для вершины коллекции.',rarity:'Mythic',cost:400000,cps:1500}];
+brands.push(
+{id:'puma',name:'PUMA Select',icon:'🐆',desc:'Спортивная энергия и streetwear.',rarity:'Rare',cost:700,cps:7},
+{id:'newbalance',name:'New Balance',icon:'🏃',desc:'Комфорт, ретро и городской стиль.',rarity:'Rare',cost:1200,cps:11},
+{id:'converse',name:'Converse',icon:'⭐',desc:'Кеды вне времени.',rarity:'Rare',cost:1800,cps:16},
+{id:'vans',name:'Vans',icon:'🛹',desc:'Скейт-культура и повседневная классика.',rarity:'Rare',cost:3000,cps:25},
+{id:'carhartt',name:'Carhartt WIP',icon:'🧢',desc:'Утилитарный стиль и рабочая эстетика.',rarity:'Epic',cost:6000,cps:52},
+{id:'stussy',name:'Stüssy',icon:'🌊',desc:'Легендарная street-культура.',rarity:'Epic',cost:12000,cps:105},
+{id:'bape',name:'BAPE',icon:'🦍',desc:'Японский streetwear и редкие дропы.',rarity:'Epic',cost:24000,cps:210},
+{id:'stoneisland',name:'Stone Island',icon:'🧵',desc:'Технические ткани и культовые детали.',rarity:'Legendary',cost:65000,cps:480},
+{id:'balenciaga',name:'Balenciaga',icon:'🕶️',desc:'Экспериментальная высокая мода.',rarity:'Legendary',cost:110000,cps:800},
+{id:'prada',name:'Prada',icon:'🖤',desc:'Итальянская роскошь и минимализм.',rarity:'Legendary',cost:160000,cps:1150},
+{id:'dior',name:'Dior',icon:'🌟',desc:'Высокая мода с парижским характером.',rarity:'Mythic',cost:350000,cps:2600},
+{id:'versace',name:'Versace',icon:'🪙',desc:'Максимализм, золото и громкий стиль.',rarity:'Mythic',cost:600000,cps:4200}
+);
+shoes.push(
+{id:'chuck',name:'Converse Chuck 70',icon:'👟',desc:'Классические высокие кеды.',rarity:'Common',cost:300,cps:2},
+{id:'oldskool',name:'Vans Old Skool',icon:'🛹',desc:'Скейт-икона на каждый день.',rarity:'Rare',cost:1300,cps:7},
+{id:'nb990',name:'New Balance 990',icon:'🏃',desc:'Премиальный комфорт и ретро-силуэт.',rarity:'Epic',cost:7000,cps:32},
+{id:'suede',name:'PUMA Suede',icon:'🐆',desc:'Классика спортивной культуры.',rarity:'Epic',cost:14000,cps:62},
+{id:'speed',name:'Speed-style Runner',icon:'⚡',desc:'Футуристичный силуэт высокой моды.',rarity:'Legendary',cost:120000,cps:450},
+{id:'diorhigh',name:'Dior High-top',icon:'💠',desc:'Люксовая пара для топовой коллекции.',rarity:'Mythic',cost:550000,cps:1900}
+);
+const ups=[
+{id:'tap1',name:'Золотые пальцы',icon:'👆',desc:'+1 ₽ к каждому клику',base:50,type:'click',value:1},
+{id:'tap2',name:'Вирусный контент',icon:'📱',desc:'+3 ₽ к каждому клику',base:300,type:'click',value:3},
+{id:'studio',name:'Контент-студия',icon:'📸',desc:'+5 ₽/сек пассивного дохода',base:250,type:'cps',value:5},
+{id:'team',name:'Команда стилистов',icon:'🧑‍🎨',desc:'+20 ₽/сек пассивного дохода',base:1500,type:'cps',value:20},
+{id:'warehouse',name:'Модный склад',icon:'🏬',desc:'+100 ₽/сек пассивного дохода',base:9000,type:'cps',value:100},
+{id:'global',name:'Глобальная экспансия',icon:'🌎',desc:'+25% ко всему доходу',base:25000,type:'mult',value:.25}];
+ups.push(
+{id:'auto1',name:'Автоматизация склада',icon:'🤖',desc:'+5 ₽/сек к пассивному доходу.',base:1200,value:5,type:'cps'},
+{id:'click3',name:'Золотые перчатки',icon:'🧤',desc:'+10 ₽ за каждый клик.',base:2500,value:10,type:'click'},
+{id:'mult2',name:'Маркетинговая кампания',icon:'📣',desc:'+25% к общему доходу.',base:12000,value:0.25,type:'mult'},
+{id:'auto2',name:'Глобальная логистика',icon:'🚚',desc:'+80 ₽/сек к пассивному доходу.',base:55000,value:80,type:'cps'},
+{id:'click4',name:'Тренировка менеджера',icon:'🧠',desc:'+75 ₽ за клик.',base:90000,value:75,type:'click'},
+{id:'mult3',name:'Модный конгломерат',icon:'🏙️',desc:'+50% к общему доходу.',base:350000,value:0.5,type:'mult'}
+);
+
+const fresh=()=>({money:0,totalEarned:0,runEarned:0,totalClicks:0,level:1,xp:0,clickPower:1,clickBonus:0,cpsBonus:0,multiplier:1,prestiges:0,prestigePoints:0,prestigeUpgrades:{},ownedBrands:[],ownedShoes:[],upgradeLevels:{},dailyDay:'',dailyStreak:0,claimed:[],sound:false,gems:0,lastGemDay:'',lastSeen:Date.now()});
+let s=fresh(),toastTimer;
+const $=id=>document.getElementById(id);
+function fmt(n){if(!Number.isFinite(n))return'0';if(n<1000)return Math.floor(n).toLocaleString('ru-RU');const u=['тыс.','млн','млрд','трлн'];let i=-1;while(n>=1000&&i<u.length-1){n/=1000;i++}return n.toLocaleString('ru-RU',{maximumFractionDigits:n<10?1:0})+' '+u[i]}
+const cash=n=>fmt(n)+' ₽';
+function prestigeMultiplier(){return 1+s.prestiges*0.25+(s.prestigeUpgrades.income||0)*0.10}
+function cps(){return([...brands.filter(x=>s.ownedBrands.includes(x.id)),...shoes.filter(x=>s.ownedShoes.includes(x.id))].reduce((a,x)=>a+x.cps,0)+s.cpsBonus)*s.multiplier*prestigeMultiplier()}
+function clickPower(){return(s.clickPower+s.clickBonus)*s.multiplier*prestigeMultiplier()}
+function needXP(){return s.level*100}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2100)}
+let audioCtx;
+function beep(kind='click'){
+ if(!s.sound)return;
+ try{
+  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+  const now=audioCtx.currentTime;
+  const notes=kind==='buy'?[659.25,830.61,987.77]:kind==='reward'?[783.99,987.77,1174.66]:kind==='error'?[220]:[523.25,659.25];
+  notes.forEach((hz,i)=>{
+   const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+   o.type='sine';o.frequency.setValueAtTime(hz,now+i*.045);
+   g.gain.setValueAtTime(.0001,now+i*.045);
+   g.gain.exponentialRampToValueAtTime(kind==='click'?.025:.045,now+i*.045+.012);
+   g.gain.exponentialRampToValueAtTime(.0001,now+i*.045+.20);
+   o.connect(g);g.connect(audioCtx.destination);o.start(now+i*.045);o.stop(now+i*.045+.22);
+  });
+ }catch(e){}
+}
+function save(){try{s.lastSeen=Date.now();localStorage.setItem(KEY,JSON.stringify(s));$('saveStatus').textContent='● Сохранено'}catch(e){$('saveStatus').textContent='● Не удалось сохранить'}}
+function load(){try{const raw=localStorage.getItem(KEY)||localStorage.getItem('mloy_empire_html_save_v2');if(!raw)return;const old=JSON.parse(raw);s={...fresh(),...old,runEarned:old.runEarned??old.totalEarned??0,prestiges:old.prestiges||0,prestigePoints:old.prestigePoints||0,prestigeUpgrades:old.prestigeUpgrades||{},upgradeLevels:old.upgradeLevels||{},ownedBrands:old.ownedBrands||[],ownedShoes:old.ownedShoes||[],claimed:old.claimed||[]};const away=Math.min(28800,Math.max(0,(Date.now()-(s.lastSeen||Date.now()))/1000));if(away>15){const gain=cps()*away;s.money+=gain;s.totalEarned+=gain;setTimeout(()=>gain>0&&toast('Офлайн-доход: +'+cash(gain)),600)}}catch(e){s=fresh()}}
+function add(n){s.money+=n;s.totalEarned+=n;s.runEarned=(s.runEarned||0)+n;s.xp+=Math.max(1,Math.floor(n/10));while(s.xp>=needXP()){s.xp-=needXP();s.level++;toast('🎉 Новый уровень: '+s.level)}}
+function card(x,type){const owned=(type==='brand'?s.ownedBrands:s.ownedShoes).includes(x.id),can=s.money>=x.cost;return `<article class="card ${owned?'owned':''}"><div class="art">${x.icon}</div><div class="rarity">${x.rarity}</div><h3>${x.name}</h3><p>${x.desc}</p><div class="income">Доход: <b>${cash(x.cps)}/сек</b></div><div class="cardbottom"><span class="${owned?'owned-label':'price'}">${owned?'✓ В КОЛЛЕКЦИИ':cash(x.cost)}</span><button class="buy" data-buy="${type}:${x.id}" ${owned||!can?'disabled':''}>${owned?'Куплено':can?'Купить':'Не хватает'}</button></div></article>`}
+function missionData(){return[
+{id:'clicks',icon:'👆',name:'Разогрев',desc:'Сделай 25 кликов',p:Math.min(25,s.totalClicks),goal:25,reward:75,done:s.totalClicks>=25},
+{id:'cash',icon:'💰',name:'Первый капитал',desc:'Заработай 500 ₽ суммарно',p:Math.min(500,s.totalEarned),goal:500,reward:150,done:s.totalEarned>=500},
+{id:'brand',icon:'🏷️',name:'Владелец бренда',desc:'Купи первый бренд',p:s.ownedBrands.length?1:0,goal:1,reward:200,done:s.ownedBrands.length>0},
+{id:'shoe',icon:'👟',name:'Коллекционер',desc:'Купи первые кроссовки',p:s.ownedShoes.length?1:0,goal:1,reward:250,done:s.ownedShoes.length>0}]}
+function renderMissions(){$('missions').innerHTML=missionData().map(m=>{let done=s.claimed.includes(m.id);return `<div class="mission"><div class="mi">${m.icon}</div><div class="miinfo"><b>${m.name}</b><small>${m.desc} · ${m.p}/${m.goal}</small><div class="bar"><i style="width:${m.p/m.goal*100}%"></i></div></div><button class="buy" data-mission="${m.id}" ${!m.done||done?'disabled':''}>${done?'✓':cash(m.reward)}</button></div>`}).join('')}
+function prestigeRequirement(){return 100000*Math.pow(4,s.prestiges||0)} 
+function renderPrestige(){
+ const req=prestigeRequirement(),earned=s.runEarned||0,ready=earned>=req&&s.level>=10;
+ const reward=Math.max(1,Math.floor(Math.sqrt(Math.max(1,earned/100000))));
+ const upgrades=[{id:'income',name:'Наследие империи',desc:'+10% дохода за уровень',cost:1,level:s.prestigeUpgrades?.income||0}];
+ $('prestigePanel').innerHTML=`<div class="prestige-box"><div class="prestige-emblem">♛</div><div class="prestige-stats"><div class="chip">Перерождений: <b>${s.prestiges||0}</b></div><div class="chip">Очки наследия: <b>${s.prestigePoints||0}</b></div><div class="chip">Постоянный множитель: <b>×${prestigeMultiplier().toFixed(2)}</b></div></div><h3>Следующий рубеж: ${cash(req)} за текущий забег</h3><p>Нужно заработать ${cash(req)} за один забег и достичь 10 уровня. Перерождение сбросит деньги, бренды, кроссовки и обычные улучшения, но сохранит достижения, общий заработок и усиления наследия.</p><div class="bar"><i style="width:${Math.min(100,earned/req*100)}%"></i></div><p>Прогресс: ${cash(earned)} / ${cash(req)}</p><button class="goldbtn" id="rebirthBtn" ${ready?'':'disabled'}>♻️ Переродиться · +${reward} очк.</button></div><div class="prestige-upgrades">${upgrades.map(u=>`<div class="upgrade"><div class="upicon">✨</div><div class="updesc"><h3>${u.name} · ур. ${u.level}</h3><p>${u.desc}</p></div><div class="upbuy"><div class="price">${u.cost} очк.</div><button class="buy" data-prestige-up="${u.id}" ${s.prestigePoints<u.cost?'disabled':''}>Улучшить</button></div></div>`).join('')}</div>`;
+}
+function doRebirth(){
+ const req=prestigeRequirement(),earned=s.runEarned||0;
+ if(earned<req||s.level<10){toast('Пока рано! Достигни рубежа и 10 уровня.');return}
+ const reward=Math.max(1,Math.floor(Math.sqrt(Math.max(1,earned/100000))));
+ s.prestiges=(s.prestiges||0)+1;s.prestigePoints=(s.prestigePoints||0)+reward;
+ s.money=0;s.runEarned=0;s.level=1;s.xp=0;s.clickPower=1;s.clickBonus=0;s.cpsBonus=0;s.multiplier=1;
+ s.ownedBrands=[];s.ownedShoes=[];s.upgradeLevels={};s.claimed=[];
+ beep('reward');toast('♻️ Перерождение! Империя стала сильнее.');render();save();
+}
+function render(){ $('money').innerHTML=fmt(s.money)+' <small>₽</small>';$('pc').textContent='+'+cash(clickPower());$('cps').textContent=cash(cps());$('clicks').textContent=fmt(s.totalClicks);$('level').textContent=s.level;$('brands').innerHTML=brands.map(x=>card(x,'brand')).join('');$('shoes').innerHTML=shoes.map(x=>card(x,'shoe')).join('');$('brandCount').textContent=s.ownedBrands.length+' / '+brands.length;$('shoeCount').textContent=s.ownedShoes.length+' / '+shoes.length;
+$('upgrades').innerHTML=ups.map(u=>{let l=s.upgradeLevels[u.id]||0,c=Math.floor(u.base*Math.pow(1.8,l));return `<div class="upgrade"><div class="upicon">${u.icon}</div><div class="updesc"><h3>${u.name} <span style="color:var(--gold)">ур. ${l}</span></h3><p>${u.desc}</p></div><div class="upbuy"><div class="price">${cash(c)}</div><button class="buy" data-up="${u.id}" ${s.money<c?'disabled':''}>Улучшить</button></div></div>`}).join('');
+const all=[...brands.filter(x=>s.ownedBrands.includes(x.id)).map(x=>({...x,kind:'БРЕНД'})),...shoes.filter(x=>s.ownedShoes.includes(x.id)).map(x=>({...x,kind:'КРОССОВКИ'}))];$('collection').innerHTML=all.length?all.map(x=>`<article class="card owned"><div class="art">${x.icon}</div><div class="rarity">${x.kind} · ${x.rarity}</div><h3>${x.name}</h3><p>${x.desc}</p><div class="income">Доход: <b>${cash(x.cps)}/сек</b></div></article>`).join(''):'<div class="empty">👑 Коллекция пока пуста.<br>Купи первый бренд или пару в магазине.</div>';
+const data=[['👑','Уровень',s.level],['💰','Всего заработано',cash(s.totalEarned)],['👆','Всего кликов',fmt(s.totalClicks)],['⚡','Пассивный доход',cash(cps())+'/сек'],['🏷️','Бренды',s.ownedBrands.length+' / '+brands.length],['👟','Кроссовки',s.ownedShoes.length+' / '+shoes.length],['✨','Опыт',s.xp+' / '+needXP()],['📈','Множитель','×'+s.multiplier.toFixed(2)]];$('profile').innerHTML=data.map(x=>`<article class="card"><div class="art">${x[0]}</div><div class="rarity">ТВОЙ ПРОФИЛЬ</div><h3>${x[1]}</h3><p style="font-size:18px;color:var(--gold);font-weight:950">${x[2]}</p></article>`).join('');
+const today=new Date().toLocaleDateString('en-CA'),claimed=s.dailyDay===today;$('dailyBtn').disabled=claimed;$('dailyBtn').textContent=claimed?'Получено':'Забрать';$('dailyText').textContent=claimed?'Возвращайся завтра за новой наградой':'Бонус дня: '+cash(100+s.dailyStreak*50);$('dailyBar').style.width=claimed?'100%':Math.min(95,s.dailyStreak*14)+'%';renderMissions();renderPrestige();renderDonate()}
+function floatText(x,y){let f=document.createElement('div');f.className='float';f.textContent='+'+cash(clickPower());f.style.left=x+'px';f.style.top=y+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),750)}
+function spark(){let b=$('clicker'),r=b.getBoundingClientRect();for(let i=0;i<7;i++){let a=document.createElement('span');a.className='spark';a.textContent='✦';a.style.left='50%';a.style.top='50%';a.style.color='#ffe9a0';a.style.setProperty('--x',(Math.random()*150-75)+'px');a.style.setProperty('--y',(Math.random()*150-75)+'px');b.appendChild(a);setTimeout(()=>a.remove(),650)}}
+$('clicker').addEventListener('click',e=>{add(clickPower());s.totalClicks++;s.xp+=1;beep('click');floatText(e.clientX,e.clientY);spark();render();save()});
+document.addEventListener('click',e=>{if(e.target.closest('#rebirthBtn')){doRebirth();return}let pu=e.target.closest('[data-prestige-up]');if(pu){const id=pu.dataset.prestigeUp;if(id==='income'&&(s.prestigePoints||0)>=1){s.prestigePoints--;s.prestigeUpgrades=s.prestigeUpgrades||{};s.prestigeUpgrades.income=(s.prestigeUpgrades.income||0)+1;toast('✨ Наследие усилено!');render();save()}return}let b=e.target.closest('[data-buy]');if(b){let [type,id]=b.dataset.buy.split(':'),list=type==='brand'?brands:shoes,owned=type==='brand'?s.ownedBrands:s.ownedShoes,x=list.find(i=>i.id===id);if(!x||owned.includes(id)||s.money<x.cost)return;s.money-=x.cost;owned.push(id);beep('buy');toast('👑 Приобретено: '+x.name);render();save();return}
+let ubtn=e.target.closest('[data-up]');if(ubtn){let u=ups.find(x=>x.id===ubtn.dataset.up),l=s.upgradeLevels[u.id]||0,c=Math.floor(u.base*Math.pow(1.8,l));if(s.money<c)return;s.money-=c;beep('buy');s.upgradeLevels[u.id]=l+1;if(u.type==='click')s.clickBonus+=u.value;else if(u.type==='cps')s.cpsBonus+=u.value;else s.multiplier*=1+u.value;toast('⚡ Улучшение куплено!');render();save();return}
+let mb=e.target.closest('[data-mission]');if(mb){let m=missionData().find(x=>x.id===mb.dataset.mission);if(!m||!m.done||s.claimed.includes(m.id))return;s.claimed.push(m.id);add(m.reward);beep('reward');toast('🎯 Задание выполнено: +'+cash(m.reward));render();save()}});
+
+const premiumItems=[
+{id:'goldframe',name:'Золотая рамка',icon:'🖼️',desc:'Косметический VIP-бонус профиля.',cost:25,kind:'Косметика'},
+{id:'crownboost',name:'Королевский буст',icon:'👑',desc:'Постоянно +10% к доходу.',cost:60,kind:'Буст'},
+{id:'diamondshoes',name:'Алмазные кроссовки',icon:'💎',desc:'Эксклюзивный предмет в коллекцию.',cost:100,kind:'Эксклюзив'},
+{id:'vip',name:'VIP-статус',icon:'🌟',desc:'Покажи статус в своём профиле.',cost:150,kind:'VIP'}];
+const moneyPacks=[
+{id:'starterpack',name:'Starter Pack',icon:'💎',desc:'250 кристаллов для первых покупок.',price:'€0.99',gems:250},
+{id:'royalpack',name:'Royal Pack',icon:'👑',desc:'1 500 кристаллов для коллекционера.',price:'€4.99',gems:1500},
+{id:'empirepack',name:'Empire Pack',icon:'🏆',desc:'5 000 кристаллов для большой империи.',price:'€12.99',gems:5000}
+];
+function renderDonate(){
+ $('gems').textContent=s.gems||0;
+ $('donateCards').innerHTML=premiumItems.map(x=>{let owned=(s.premiumOwned||[]).includes(x.id);
+ $('moneyPacks').innerHTML=moneyPacks.map(x=>`<article class="card premium"><div class="art">${x.icon}</div><div class="rarity">ПАКЕТ · DEMO</div><h3>${x.name}</h3><p>${x.desc}</p><div class="income">Цена: <b>${x.price}</b></div><div class="cardbottom"><span class="price">${x.gems.toLocaleString('ru-RU')} 💎</span><button class="buy" data-realpack="${x.id}">Подключить оплату</button></div></article>`).join('');return `<article class="card premium ${owned?'owned':''}"><div class="art">${x.icon}</div><div class="rarity">${x.kind}</div><h3>${x.name}</h3><p>${x.desc}</p><div class="income">Цена: <b>💎 ${x.cost}</b></div><div class="cardbottom"><span class="${owned?'owned-label':'price'}">${owned?'✓ ОТКРЫТО':'ПРЕМИУМ'}</span><button class="buy" data-premium="${x.id}" ${owned||(s.gems||0)<x.cost?'disabled':''}>${owned?'Куплено':'Купить'}</button></div></article>`}).join('');
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-premium]');
+ if(b){const x=premiumItems.find(i=>i.id===b.dataset.premium);s.premiumOwned=s.premiumOwned||[];if(!x||s.premiumOwned.includes(x.id)||(s.gems||0)<x.cost)return;s.gems-=x.cost;s.premiumOwned.push(x.id);if(x.id==='crownboost')s.multiplier*=1.1;beep('reward');toast('💎 Получено: '+x.name);render();renderDonate();save();}
+});
+$('freeGems').addEventListener('click',()=>{const day=new Date().toLocaleDateString('en-CA');if(s.lastGemDay===day){toast('Завтра будут новые кристаллы!');return}s.lastGemDay=day;s.gems=(s.gems||0)+10;beep('reward');toast('+10 💎 Бесплатные кристаллы!');renderDonate();save()});
+
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+b.dataset.tab))}));
+$('dailyBtn').addEventListener('click',()=>{let today=new Date().toLocaleDateString('en-CA');if(s.dailyDay===today)return;let yesterday=new Date(Date.now()-86400000).toLocaleDateString('en-CA');s.dailyStreak=s.dailyDay===yesterday?Math.min(7,s.dailyStreak+1):1;s.dailyDay=today;let reward=100+s.dailyStreak*50;add(reward);beep('reward');toast('🎁 Бонус получен: +'+cash(reward));render();save()});
+$('sound').addEventListener('click',()=>{s.sound=!s.sound;$('sound').textContent=s.sound?'🔊':'🔇';beep('reward');toast(s.sound?'Звук включён':'Звук выключен');save()});
+$('reset').addEventListener('click',()=>{if(confirm('Точно сбросить весь прогресс? Это нельзя отменить.')){s=fresh();save();render();toast('Прогресс сброшен')}});
+load();$('sound').textContent=s.sound?'🔊':'🔇';render();let last=Date.now();setInterval(()=>{let now=Date.now(),dt=Math.min(5,(now-last)/1000);last=now;if(dt>0&&cps()>0){let g=cps()*dt;s.money+=g;s.totalEarned+=g;s.xp+=g/10;while(s.xp>=needXP()){s.xp-=needXP();s.level++;toast('🎉 Новый уровень: '+s.level)}render()}},1000);setInterval(save,8000);window.addEventListener('beforeunload',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+})();
+</script></body></html>
